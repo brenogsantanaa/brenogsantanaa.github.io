@@ -1,13 +1,13 @@
 :root {
-  --bg: #0b1221;
-  --card: rgba(17, 24, 39, 0.7);
-  --muted: #9ca3af;
-  --text: #e5e7eb;
-  --heading: #f8fafc;
-  --accent: #38bdf8;
-  --accent-2: #a855f7;
-  --border: rgba(255, 255, 255, 0.08);
-  --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --muted: #475569;
+  --text: #0f172a;
+  --heading: #0b1221;
+  --accent: #3f3f46;
+  --accent-2: #71717a;
+  --border: #e5e7eb;
+  --shadow: 0 10px 35px rgba(15, 23, 42, 0.08);
 }
 
 *,
@@ -18,8 +18,8 @@
 
 body {
   margin: 0;
-  background: radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.12), transparent 30%),
-              radial-gradient(circle at 80% 0%, rgba(168, 85, 247, 0.14), transparent 35%),
+  background: radial-gradient(circle at 20% 20%, rgba(148, 163, 184, 0.2), transparent 28%),
+              radial-gradient(circle at 80% 0%, rgba(226, 232, 240, 0.4), transparent 32%),
               var(--bg);
   color: var(--text);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -48,7 +48,7 @@ img {
 
 .hero {
   position: relative;
-  padding: 28px 24px 64px;
+  padding: 28px 24px 56px;
   max-width: 1100px;
   margin: 0 auto;
   z-index: 1;
@@ -61,7 +61,7 @@ img {
   position: sticky;
   top: 0;
   padding: 14px 18px;
-  background: rgba(11, 18, 33, 0.9);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(16px);
   border: 1px solid var(--border);
   border-radius: 14px;
@@ -91,8 +91,8 @@ img {
 }
 
 .nav-links a:hover {
-  background: rgba(56, 189, 248, 0.12);
-  color: #e0f2fe;
+  background: rgba(63, 63, 70, 0.08);
+  color: var(--heading);
 }
 
 #nav-toggle,
@@ -156,19 +156,19 @@ h1 {
 
 .btn.primary {
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  color: #0b1221;
+  color: #f8fafc;
   border: none;
-  box-shadow: 0 10px 30px rgba(56, 189, 248, 0.35);
+  box-shadow: 0 10px 24px rgba(63, 63, 70, 0.25);
 }
 
 .btn.ghost {
   color: var(--heading);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(63, 63, 70, 0.06);
 }
 
 .btn:hover {
   transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(15, 23, 42, 0.12);
 }
 
 .meta {
@@ -183,7 +183,7 @@ h1 {
   padding: 6px 10px;
   border: 1px solid var(--border);
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.03);
+  background: #f1f5f9;
 }
 
 .social {
@@ -194,7 +194,7 @@ h1 {
 
 .image-card {
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--card);
   padding: 14px;
   border-radius: 16px;
   box-shadow: var(--shadow);
@@ -264,8 +264,8 @@ h1 {
 
 .tag {
   padding: 6px 10px;
-  background: rgba(168, 85, 247, 0.14);
-  color: #ede9fe;
+  background: #f1f5f9;
+  color: var(--accent);
   border-radius: 10px;
   font-size: 13px;
 }
