@@ -1,212 +1,483 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Breno Santana | Security & Engineering</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Breno Santana | Cybersecurity &amp; Threat Intelligence</title>
+<meta name="description" content="Breno Garcia Santana — Computer Engineering student at Georgia Tech with a Cybersecurity concentration. SOC operations, cyber threat intelligence, and penetration testing.">
+<meta property="og:title" content="Breno Santana | Cybersecurity &amp; Threat Intelligence">
+<meta property="og:description" content="Computer Engineering @ Georgia Tech. SOC operations, cyber threat intelligence, penetration testing.">
+<meta property="og:type" content="website">
+<style>
+  :root{
+    --bg:#0b0e14;
+    --bg-2:#11151f;
+    --panel:#141926;
+    --line:#232b3d;
+    --text:#e6eaf2;
+    --muted:#9aa5bd;
+    --dim:#6b768f;
+    --accent:#5ee2b0;
+    --accent-2:#69a8ff;
+    --max:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent-2);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  .mono{font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace}
+
+  /* ---------- nav ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(11,14,20,.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:62px}
+  .brand{font-weight:650;letter-spacing:.2px}
+  .brand span{color:var(--accent)}
+  .nav ul{display:flex;gap:26px;list-style:none}
+  .nav a{color:var(--muted);font-size:14.5px}
+  .nav a:hover{color:var(--text);text-decoration:none}
+  .menu-btn{display:none;background:none;border:1px solid var(--line);color:var(--text);
+    border-radius:8px;padding:6px 10px;font-size:16px;cursor:pointer}
+
+  /* ---------- hero ---------- */
+  .hero{padding:76px 0 64px;border-bottom:1px solid var(--line)}
+  .hero-grid{display:grid;grid-template-columns:1.35fr .85fr;gap:52px;align-items:center}
+  .eyebrow{
+    font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:16px;
+  }
+  h1{font-size:clamp(30px,4.6vw,46px);line-height:1.12;letter-spacing:-.02em;font-weight:680}
+  .lede{color:var(--muted);font-size:17px;margin-top:20px;max-width:56ch}
+  .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+  .btn{
+    display:inline-block;padding:11px 20px;border-radius:9px;font-size:14.5px;font-weight:560;
+    border:1px solid var(--line);color:var(--text);
+  }
+  .btn:hover{text-decoration:none;border-color:var(--dim)}
+  .btn.primary{background:var(--accent);color:#07231a;border-color:var(--accent)}
+  .btn.primary:hover{filter:brightness(1.07)}
+  .status{
+    margin-top:28px;padding-top:22px;border-top:1px solid var(--line);
+    display:flex;flex-wrap:wrap;gap:10px 20px;font-size:13.5px;color:var(--dim);
+  }
+  .chip{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--panel);border:1px solid var(--line);
+    border-radius:999px;padding:6px 14px;color:var(--muted);font-size:13px;
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
+  .portrait{
+    width:100%;border-radius:14px;border:1px solid var(--line);display:block;
+    filter:saturate(.95);
+  }
+
+  /* ---------- sections ---------- */
+  section{padding:72px 0;border-bottom:1px solid var(--line)}
+  .kicker{
+    font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--dim);margin-bottom:12px;
+  }
+  h2{font-size:clamp(23px,3vw,31px);letter-spacing:-.015em;font-weight:660;margin-bottom:14px}
+  .sub{color:var(--muted);max-width:70ch;margin-bottom:34px}
+  h3{font-size:18px;font-weight:620;letter-spacing:-.01em}
+
+  .prose p{color:var(--muted);max-width:68ch;margin-bottom:16px}
+  .prose strong{color:var(--text);font-weight:600}
+
+  /* ---------- cards ---------- */
+  .card{
+    background:var(--bg-2);border:1px solid var(--line);border-radius:13px;
+    padding:26px 26px 22px;margin-bottom:18px;
+  }
+  .card-top{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;justify-content:space-between}
+  .meta{color:var(--dim);font-size:13.5px}
+  .org{color:var(--accent);font-weight:560}
+  .card ul{margin:16px 0 0 0;padding-left:0;list-style:none}
+  .card li{
+    position:relative;padding-left:20px;margin-bottom:9px;color:var(--muted);font-size:15px;
+  }
+  .card li::before{
+    content:"";position:absolute;left:2px;top:9px;width:6px;height:6px;
+    border-radius:1.5px;background:var(--line);border:1px solid var(--dim);
+  }
+  .card li:last-child{margin-bottom:0}
+
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+  .tag{
+    font-size:12px;padding:4px 10px;border-radius:6px;
+    background:var(--panel);border:1px solid var(--line);color:var(--muted);
+  }
+
+  /* ---------- education / skills ---------- */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .skill-row{display:grid;grid-template-columns:132px 1fr;gap:14px;margin-bottom:14px;font-size:14.7px}
+  .skill-row b{color:var(--text);font-weight:600}
+  .skill-row span{color:var(--muted)}
+
+  /* ---------- projects ---------- */
+  .proj{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .proj .card{margin-bottom:0;display:flex;flex-direction:column}
+  .shot{
+    width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:9px;
+    border:1px solid var(--line);margin-bottom:18px;background:var(--panel);
+  }
+  .badge{
+    font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+    color:#07231a;background:var(--accent);border-radius:5px;padding:3px 8px;font-weight:650;
+  }
+  .badge.wip{background:var(--accent-2);color:#04162e}
+
+  /* ---------- contact ---------- */
+  .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
+  .contact-grid .card{margin:0}
+  .contact-grid .label{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:7px}
+  footer{padding:34px 0 44px;color:var(--dim);font-size:13.5px;display:flex;
+    justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+  @media (max-width:860px){
+    .hero-grid,.proj,.split{grid-template-columns:1fr}
+    .hero-grid{gap:36px}
+    .portrait{max-width:340px}
+    .contact-grid{grid-template-columns:1fr}
+    .nav ul{
+      display:none;position:absolute;top:62px;left:0;right:0;
+      flex-direction:column;gap:0;background:var(--bg-2);
+      border-bottom:1px solid var(--line);padding:8px 24px 16px;
+    }
+    .nav ul.open{display:flex}
+    .nav ul li{padding:9px 0;border-bottom:1px solid var(--line)}
+    .menu-btn{display:block}
+    .skill-row{grid-template-columns:1fr;gap:2px}
+    section{padding:56px 0}
+  }
+</style>
 </head>
-<body>
-  <div class="noise"></div>
-  <header class="hero" id="top">
-    <nav class="nav">
-      <div class="brand">Breno Santana</div>
-      <input type="checkbox" id="nav-toggle" aria-label="Toggle navigation">
-      <label for="nav-toggle" class="nav-toggle">☰</label>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#internships">Internships</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#resume">Resume</a></li>
-        <li><a href="#contact">Contact</a></li>
+<body id="top">
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">Breno<span>.</span>Santana</div>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <ul id="menu">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#resume">Résumé</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Computer Engineering @ Georgia Tech</div>
+      <h1>Cybersecurity, threat intelligence,<br>and security operations.</h1>
+      <p class="lede">
+        I work across the defensive and offensive sides of security — triaging alerts in a bank SOC,
+        tracking Brazilian cybercrime on Telegram for a threat intelligence firm, and testing web
+        applications for the flaws that put them there.
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="assets/Breno_Santana_Resume.pdf">Download résumé</a>
+        <a class="btn" href="mailto:brenosantanaa13@gmail.com">Email me</a>
+        <a class="btn" href="https://www.linkedin.com/in/breno-garcia-santana/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/brenogsantanaa" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <div class="status">
+        <span class="chip"><span class="dot"></span>Open to Summer 2027 internships &amp; full-time from Dec 2027</span>
+        <span class="chip">Atlanta, GA</span>
+        <span class="chip">PT · EN · ES</span>
+      </div>
+    </div>
+    <div>
+      <img class="portrait"
+           src="https://static.wixstatic.com/media/b38f93_85733ff4871a4b059a6a85fbb6f99a2a~mv2.png/v1/fill/w_621,h_682,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/professional-Headshot.png"
+           alt="Portrait of Breno Santana">
+    </div>
+  </div>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="wrap">
+    <div class="kicker">About</div>
+    <h2>Security work, from three different angles</h2>
+    <div class="prose">
+      <p>
+        I'm a junior at Georgia Tech studying Computer Engineering with a formal concentration in
+        <strong>Cybersecurity and Distributed Systems</strong>. Over the past two years I've worked
+        blue team, threat intelligence, and offensive testing — which has been the fastest way I've
+        found to understand how the pieces actually fit together.
+      </p>
+      <p>
+        Being Brazilian has turned out to be a genuine advantage in this field. A large part of the
+        cybercrime ecosystem I researched at KELA — <strong>PIX fraud kits, stealer logs, carding
+        operations</strong> — runs in Portuguese, on platforms most analysts can't read. That's a
+        niche I intend to keep building on.
+      </p>
+      <p>
+        Before security, I swam. Twelve years of competitive swimming, four of them as a club captain
+        in Brazil, and a run as a <strong>top-10 all-time performer in Georgia Tech program
+        history</strong> and a multiple-time Brazilian junior national champion. Competing at that
+        level while carrying a full engineering load taught me the thing this work rewards most:
+        showing up consistently for something that only pays off much later.
+      </p>
+      <p>
+        I like learning by building and breaking things — understanding how systems fail, how they're
+        misused, and how to design them so they hold.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section id="experience">
+  <div class="wrap">
+    <div class="kicker">Experience</div>
+    <h2>Where I've worked</h2>
+    <p class="sub">Three security internships across defensive operations, cyber threat intelligence, and application security.</p>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Information Security Intern · <span class="org">Banco Rendimento</span></h3>
+        <div class="meta">São Paulo, Brazil · Jul 2026 – Present</div>
+      </div>
+      <ul>
+        <li>Triage 10–15 alerts and investigations per week within a 12-person security team, correlating logs across Google SecOps SIEM, Datadog, Cisco Umbrella, and Akamai to separate false positives from actionable incidents.</li>
+        <li>Executed 3 web application penetration tests with Burp Suite, documenting reproduction steps and remediation guidance for application owners.</li>
+        <li>Perform forensic analysis on escalated cases and enrich investigations with external OSINT to establish attacker context.</li>
+        <li>Contribute to internal security policy development and control framework documentation.</li>
       </ul>
-    </nav>
-    <div class="hero-grid">
-      <div class="hero-copy">
-        <p class="eyebrow">Computer Engineering @ Georgia Tech</p>
-        <h1>Cybersecurity & Security Engineering</h1>
-        <p class="lede">
-          I’m a computer engineering student focused on building secure systems, automation, and understanding how attacks work at the network and system level.
-          I’ve worked in a Security Operations Center analyzing network traffic, investigating phishing, and supporting incident response workflows.
-        </p>
-        <div class="actions">
-          <a class="btn primary" href="https://0c46f12f-d04b-48fe-82b7-e452357c11be.filesusr.com/ugd/b38f93_5543a3c228dd44de8302192398ca8423.pdf" target="_blank" rel="noreferrer noopener">Download Resume</a>
-          <a class="btn ghost" href="mailto:brenosantanaa13@gmail.com">Email me</a>
+      <div class="tags">
+        <span class="tag">Google SecOps SIEM</span><span class="tag">Datadog</span>
+        <span class="tag">Cisco Umbrella</span><span class="tag">Akamai</span>
+        <span class="tag">Burp Suite</span><span class="tag">Incident Response</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Cyber Threat Intelligence Intern · <span class="org">KELA</span></h3>
+        <div class="meta">Tel Aviv, Israel (Remote) · May – Jul 2026</div>
+      </div>
+      <ul>
+        <li>Reviewed 100+ Telegram channels tied to Brazilian cybercrime over a 7-week engagement, narrowing to 10 high-priority threat-actor channels distributing leaked databases, PIX fraud kits, carding services, and stealer logs.</li>
+        <li>Built a categorized threat-actor tracker mapping channel operators and cross-platform footprints, delivered to the intelligence lead.</li>
+        <li>Applied a structured discovery methodology across TGStat, Telemetr.io, and lyzem, cross-referencing dark web sources to validate attribution before escalation.</li>
+        <li>Operated a hardened collection environment — isolated browser, VPN, Tor — in line with internal OPSEC policy.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">OSINT</span><span class="tag">Threat Intelligence</span>
+        <span class="tag">Telegram Investigation</span><span class="tag">Dark Web Research</span>
+        <span class="tag">OPSEC</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <h3>Security Operations Center Intern · <span class="org">Positivo S+</span></h3>
+        <div class="meta">Curitiba, Brazil · Jun – Aug 2025</div>
+      </div>
+      <ul>
+        <li>Triaged 20–30 alerts per shift, analyzing TCP/IP, DNS, and HTTP/HTTPS traffic to identify anomalies and escalate confirmed incidents according to response policy.</li>
+        <li>Performed vulnerability assessments with Nmap and Exploit DB, analyzing packet captures in Wireshark to confirm or rule out suspected intrusions.</li>
+        <li>Investigated authentication and identity alerts, applying cryptography fundamentals to assess credential compromise.</li>
+        <li>Partnered with senior analysts to reduce false positives and document repeatable response procedures.</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">SOC Operations</span><span class="tag">Wireshark</span>
+        <span class="tag">Nmap</span><span class="tag">SIEM</span><span class="tag">TCP/IP</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects">
+  <div class="wrap">
+    <div class="kicker">Projects</div>
+    <h2>Learning by building and breaking</h2>
+    <p class="sub">Security tooling, machine learning, and low-level embedded work.</p>
+
+    <div class="proj">
+
+      <div class="card">
+        <div class="card-top">
+          <h3>ML-Powered Malware Analysis Platform</h3>
+          <span class="badge wip">In progress</span>
         </div>
-        <div class="meta">
-          <span>Atlanta, GA</span>
-          <span>Open to Summer 2026 Security Eng/SOC internships</span>
-        </div>
-        <div class="social">
-          <a href="https://www.linkedin.com/in/breno-garcia-santana/" target="_blank" rel="noreferrer noopener">LinkedIn</a>
-          <a href="https://github.com/brenogsantanaa" target="_blank" rel="noreferrer noopener">GitHub</a>
+        <ul>
+          <li>Offline triage platform for Windows PE files combining static analysis, YARA rule matching, MITRE ATT&amp;CK technique mapping, and supervised classification.</li>
+          <li>Modular Python pipeline for PE feature extraction and automated classification, containerized in Docker.</li>
+          <li>Designed to run fully air-gapped so unknown samples never touch the network.</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">YARA</span><span class="tag">Docker</span>
+          <span class="tag">scikit-learn</span><span class="tag">MITRE ATT&amp;CK</span>
         </div>
       </div>
-      <div class="hero-media">
-        <div class="image-card">
-          <img src="https://static.wixstatic.com/media/b38f93_85733ff4871a4b059a6a85fbb6f99a2a~mv2.png/v1/fill/w_621,h_682,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/professional-Headshot.png" alt="Portrait of Breno Santana">
+
+      <div class="card">
+        <div class="card-top">
+          <h3>Sports Outcome Prediction Engine</h3>
+        </div>
+        <ul>
+          <li>End-to-end machine learning pipelines predicting NBA game outcomes and FIFA World Cup results, trained on all available historical game data for both competitions.</li>
+          <li>Engineered team- and game-level features and benchmarked multiple model families across training and evaluation runs.</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">pandas</span><span class="tag">NumPy</span>
+          <span class="tag">scikit-learn</span><span class="tag">XGBoost</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <img class="shot" src="https://brenogsantanaa.github.io/assets/mbed-game-1.jpg" alt="Mbed handheld game start screen">
+        <div class="card-top">
+          <h3>Embedded 2D Video Game (Mbed, C)</h3>
+        </div>
+        <ul>
+          <li>Built a complete embedded 2D game in C on the Mbed platform — game loop, hardware button input, sprite rendering, scoring, lives, power-ups, teleportation, and win/lose conditions.</li>
+          <li>Custom hash-table–based map system with manually designed sprites, optimized for a constrained uLCD display.</li>
+          <li>Low-level systems programming under real memory and performance limits.</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">C</span><span class="tag">Mbed</span><span class="tag">Embedded Systems</span>
+          <span class="tag">Data Structures</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <img class="shot" src="https://brenogsantanaa.github.io/assets/pcb-discovery.jpg" alt="PCB Discovery Project cover slide">
+        <div class="card-top">
+          <h3>PCB Design (Altium)</h3>
+        </div>
+        <ul>
+          <li>Learned Altium Designer end to end: schematic symbols, footprints, wiring, and board layout for a 9V-powered LED circuit.</li>
+          <li>Built reusable components, validated footprints, and exported Gerber fabrication files.</li>
+          <li>Reviewed the design in 3D to confirm manufacturability.</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Altium Designer</span><span class="tag">PCB Layout</span><span class="tag">Hardware</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDUCATION & SKILLS ============ -->
+<section id="education">
+  <div class="wrap">
+    <div class="kicker">Education &amp; Skills</div>
+    <h2>Georgia Institute of Technology</h2>
+    <p class="sub">B.S. Computer Engineering — Cybersecurity &amp; Distributed Systems concentration ·
+      Expected December 2027 · GPA 3.27 · Dean's List (3 semesters)</p>
+
+    <div class="split">
+      <div class="card">
+        <h3>Relevant coursework</h3>
+        <ul>
+          <li>Computer Communications</li>
+          <li>Programming Hardware/Software Systems</li>
+          <li>Data Structures &amp; Algorithms</li>
+          <li>Digital System Design · Digital Design Lab</li>
+          <li>Discrete Mathematics · Statistics &amp; Applications</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>In progress — Fall 2026</h3>
+        <ul>
+          <li>Internetwork Security</li>
+          <li>Introduction to Computer Security</li>
+          <li>Computer Architecture, Systems &amp; Concurrency</li>
+          <li>Advanced Programming Techniques</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Google Cybersecurity Professional Certificate</span>
         </div>
       </div>
     </div>
-  </header>
 
-  <main>
-    <section id="about" class="section about">
-      <div class="section-header">
-        <p class="eyebrow">About</p>
-        <h2>Engineer with a security-first mindset</h2>
-        <p class="lede">
-          Brazilian-born, former Division I swimmer turned security-focused engineer. Thirteen years of competitive swimming taught me discipline, resilience, and how to perform under pressure while balancing demanding schedules.
-        </p>
-      </div>
-      <div class="two-col">
-        <div class="text">
-          <p>
-            Moving to the United States to study engineering pushed me to adapt quickly to anew country, language, and academic system. It reinforced how seriously I take personal and professional growth and how to stay focused in high-expectation environments.
-          </p>
-          <p>
-            I like learning by building and breaking things: understanding how systems fail, how they’re misused, and how to design them to be secure and reliable. I’m motivated by continuous improvement—deepening my technical foundation and refining how I approach problems.
-          </p>
-          <div class="pill-grid">
-            <span class="pill">Summer 2026: Security Engineering / SOC / Security Automation</span>
-            <span class="pill">Cloud security & secure software engineering</span>
-            <span class="pill">Incident response & monitoring</span>
-            <span class="pill">Building security tools for lean teams</span>
-          </div>
-        </div>
-        <div class="image-card wide">
-          <img src="https://static.wixstatic.com/media/b38f93_e00efe1d5283430cbda2219299793cf3~mv2.jpg/v1/fill/w_1600,h_854,al_c,q_85,enc_avif,quality_auto/b38f93_e00efe1d5283430cbda2219299793cf3~mv2.jpg" alt="Breno Santana swimming competitively">
-        </div>
-      </div>
-    </section>
+    <div class="card" style="margin-top:18px">
+      <h3 style="margin-bottom:18px">Technical skills</h3>
+      <div class="skill-row"><b>Security</b><span>SOC operations &amp; alert triage · SIEM log correlation · incident response · digital forensics · cyber threat intelligence · OSINT collection · threat-actor profiling · web application penetration testing · vulnerability assessment · phishing analysis</span></div>
+      <div class="skill-row"><b>Tools</b><span>Google SecOps SIEM (Chronicle) · Datadog · Cisco Umbrella · Akamai · Burp Suite · Wireshark · Nmap · YARA · Exploit DB · TGStat · Telemetr.io · Tor · Docker · Git · Jupyter</span></div>
+      <div class="skill-row"><b>Networking</b><span>TCP/IP · DNS · DHCP · HTTP/HTTPS · TLS · OSI model · traffic and packet analysis · firewall rules · WAF and DNS filtering</span></div>
+      <div class="skill-row"><b>Programming</b><span>Python (proficient) · Java · C · C++ · Bash · SQL · REST APIs · JavaScript (basic)</span></div>
+      <div class="skill-row"><b>Systems</b><span>Linux · Windows · macOS</span></div>
+      <div class="skill-row"><b>Languages</b><span>Portuguese (native) · English (fluent) · Spanish (conversational)</span></div>
+    </div>
+  </div>
+</section>
 
-    <section id="internships" class="section">
-      <div class="section-header">
-        <p class="eyebrow">Experience</p>
-        <h2>Internships</h2>
-        <p class="lede">Security Operations Center experience focused on monitoring, detection, and incident response.</p>
-      </div>
-      <div class="card-grid">
-        <article class="card">
-          <div class="card-top">
-            <h3>Intern – Security Operations Center (SOC)</h3>
-            <span class="tag">Positivo S+ • Curitiba, Brazil • Jun–Aug 2025</span>
-          </div>
-          <ul>
-            <li>Monitored and analyzed network traffic (TCP/IP, DNS, HTTP/HTTPS) to identify anomalies and potential incidents.</li>
-            <li>Performed vulnerability assessments and penetration testing with Nmap, Exploit DB, and packet analysis using Wireshark.</li>
-            <li>Investigated authentication-related alerts applying cryptography and identity security concepts.</li>
-            <li>Assisted incident response: triage, log correlation in SIEM, and escalation per security policy.</li>
-            <li>Collaborated with senior analysts to improve detection quality and document response procedures.</li>
-          </ul>
-        </article>
-        <article class="card">
-          <div class="card-top">
-            <h3>Intern – Operations & Client</h3>
-            <span class="tag">Cataratas • Rio de Janeiro, Brazil • Apr–May 2025</span>
-          </div>
-          <p>Conducted field evaluations of high-profile tourist attractions, focusing on infrastructure, customer service, and accessibility. Delivered structured reports with actionable insights to drive service improvements.</p>
-          <ul>
-            <li>Observed on-site operations including ticketing, visitor logistics, and support team interactions.</li>
-            <li>Communicated technical and operational information clearly to non-technical users to reinforce safety and improve user experience.</li>
-          </ul>
-        </article>
-        <article class="card">
-          <div class="card-top">
-            <h3>Lifeguard</h3>
-            <span class="tag">Atlanta, GA • Mar 2025 – Present</span>
-          </div>
-          <p>Supervise pool activities to ensure patron safety and quick emergency response. Certified in CPR, First Aid, and AED.</p>
-          <ul>
-            <li>Conduct regular safety checks and enforce facility regulations to maintain order.</li>
-            <li>Work collaboratively with staff to create a safe and welcoming environment.</li>
-          </ul>
-        </article>
-      </div>
-    </section>
+<!-- ============ RESUME ============ -->
+<section id="resume">
+  <div class="wrap">
+    <div class="kicker">Résumé</div>
+    <h2>One page, current as of August 2026</h2>
+    <p class="sub">Experience, projects, coursework, and technical skills.</p>
+    <div class="cta" style="margin-top:0">
+      <a class="btn primary" href="assets/Breno_Santana_Resume.pdf">Download PDF</a>
+      <a class="btn" href="mailto:brenosantanaa13@gmail.com">Request more detail</a>
+    </div>
+  </div>
+</section>
 
-    <section id="projects" class="section projects">
-      <div class="section-header">
-        <p class="eyebrow">Projects</p>
-        <h2>Hands-on learning by building</h2>
-        <p class="lede">School and personal projects.</p>
+<!-- ============ CONTACT ============ -->
+<section id="contact" style="border-bottom:none">
+  <div class="wrap">
+    <div class="kicker">Contact</div>
+    <h2>Let's build secure systems.</h2>
+    <p class="sub">Open to Summer 2027 internships and full-time roles from December 2027 — security analyst, SOC, threat intelligence, and detection engineering.</p>
+    <div class="contact-grid">
+      <div class="card">
+        <div class="label">Email</div>
+        <a href="mailto:brenosantanaa13@gmail.com">brenosantanaa13@gmail.com</a>
       </div>
-      <div class="project-grid">
-        <article class="project-card">
-          <div class="project-media">
-            <img src="assets/pcb-discovery.jpg" alt="PCB Discovery Project cover slide">
-          </div>
-          <div class="project-body">
-            <h3>PCB Discovery Project (Hive Workshop)</h3>
-            <p>
-              Learned Altium Designer end-to-end: creating schematic symbols and footprints, wiring, and laying out a PCB for an LED circuit powered by a 9V battery. Produced Gerber files and reviewed the design in 3D to ensure manufacturability.
-            </p>
-            <ul>
-              <li>Built reusable components (LED, resistor, pin header) and validated footprints.</li>
-              <li>Completed schematic capture and routing with industry-standard layout practices.</li>
-              <li>Exported fabrication outputs and documented the process.</li>
-            </ul>
-          </div>
-        </article>
-        <article class="project-card">
-          <div class="project-media">
-            <img src="assets/mbed-game-1.jpg" alt="Mbed handheld game start screen">
-          </div>
-          <div class="project-body">
-            <h3>Embedded 2D Video Game (Mbed, C)</h3>
-            <p>
-              I built a complete embedded 2D video game in C using the Mbed platform, developing everything from the core game loop and hardware input handling to the visual system and gameplay mechanics. I implemented player movement, scoring, lives, power-ups, teleportation, and win/lose conditions, all running on constrained embedded hardware.
-            </p>
-            <p>
-              The game world is stored using a custom hash-table–based map system, and I designed and rendered all sprites manually, handling limited visibility, screen updates, and performance constraints on a small uLCD display. This project combined low-level systems programming with game logic, data structures, and custom graphics to deliver a fully playable handheld game.
-            </p>
-            <ul>
-              <li>Custom game loop with hardware button input and sprite rendering on uLCD.</li>
-              <li>Hash-table map storage, power-ups, teleportation, and win/lose logic.</li>
-              <li>Manual sprite design and optimized drawing for constrained hardware.</li>
-            </ul>
-            <div class="project-media" style="margin-top:12px;">
-              <img src="assets/mbed-game-2.jpg" alt="Mbed handheld game in play">
-            </div>
-          </div>
-        </article>
+      <div class="card">
+        <div class="label">LinkedIn</div>
+        <a href="https://www.linkedin.com/in/breno-garcia-santana/" target="_blank" rel="noopener">breno-garcia-santana</a>
       </div>
-    </section>
-
-    <section id="resume" class="section resume">
-      <div class="section-header">
-        <p class="eyebrow">Resume</p>
-        <h2>Download my latest CV</h2>
-        <p class="lede">One page overview of experience, projects, and technical skills.</p>
-      </div>
-      <div class="resume-card">
-        <div class="resume-preview">
-          <img src="https://static.wixstatic.com/media/b38f93_d16274d15aea460689ede2f15787dc89~mv2.png/v1/fill/w_600,h_777,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Captura%20de%20Tela%202025-12-21%20%C3%A0s%2023_15_44.png" alt="Resume preview page 1">
-          <img src="https://static.wixstatic.com/media/b38f93_ca0acbf1389340a4b298a492b8b7f112~mv2.png/v1/fill/w_600,h_777,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Captura%20de%20Tela%202025-12-21%20%C3%A0s%2023_15_46.png" alt="Resume preview page 2">
-        </div>
-        <a class="btn primary" href="https://0c46f12f-d04b-48fe-82b7-e452357c11be.filesusr.com/ugd/b38f93_5543a3c228dd44de8302192398ca8423.pdf" target="_blank" rel="noreferrer noopener">Download PDF</a>
-      </div>
-    </section>
-  </main>
-
-  <footer id="contact" class="footer">
-    <div class="footer-content">
-      <div>
-        <p class="eyebrow">Contact</p>
-        <h3>Let’s build secure systems.</h3>
-        <p>Email: <a href="mailto:brenosantanaa13@gmail.com">brenosantanaa13@gmail.com</a></p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/breno-garcia-santana/" target="_blank" rel="noreferrer noopener">breno-garcia-santana</a></p>
-        <p>GitHub: <a href="https://github.com/brenogsantanaa" target="_blank" rel="noreferrer noopener">@brenogsantanaa</a></p>
-      </div>
-      <div class="footer-actions">
-        <a class="btn ghost" href="#top">Back to top</a>
-        <a class="btn primary" href="mailto:brenosantanaa13@gmail.com">Say hello</a>
+      <div class="card">
+        <div class="label">GitHub</div>
+        <a href="https://github.com/brenogsantanaa" target="_blank" rel="noopener">@brenogsantanaa</a>
       </div>
     </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <footer>
+    <div>© 2026 Breno Garcia Santana · Atlanta, GA</div>
+    <div><a href="#top">Back to top ↑</a></div>
   </footer>
+</div>
+
+<script>
+  var btn = document.getElementById('menuBtn');
+  var menu = document.getElementById('menu');
+  btn.addEventListener('click', function () {
+    var open = menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  menu.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') { menu.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  });
+</script>
 </body>
 </html>
-
