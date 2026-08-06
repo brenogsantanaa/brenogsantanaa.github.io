@@ -189,7 +189,7 @@
       <p class="lede">
         Three internships across the defensive, intelligence, and offensive sides of security:
         a SOC in Brazil, cyber threat intelligence for a firm in Tel Aviv, and information
-        security at a bank in São Paulo.
+        security at a bank in Sao Paulo.
       </p>
       <div class="cta">
         <a class="btn primary" href="assets/Breno_Santana_Resume.pdf">Download resume</a>
@@ -232,8 +232,9 @@
         to security policy and controls under LGPD and BACEN regulations.
       </p>
       <p>
-        On my own time I'm building an offline malware triage platform for Windows PE files using
-        YARA, MITRE ATT&amp;CK mapping, and machine learning classification.
+        On my own time I'm building a self-hosted malware triage platform for Windows PE files &mdash;
+        a FastAPI and React service that parses samples and matches them against YARA rules, with
+        ML classification as the next milestone.
       </p>
       <p>
         Looking for a cybersecurity analyst internship for Summer 2027 and full-time roles from
@@ -253,7 +254,7 @@
     <div class="card">
       <div class="card-top">
         <h3>Information Security Intern · <span class="org">Banco Rendimento</span></h3>
-        <div class="meta">São Paulo, Brazil · Jul 2026 – Present</div>
+        <div class="meta">Sao Paulo, Brazil · Jul 2026 – Present</div>
       </div>
       <ul>
         <li>Triage 10–15 alerts and investigations per week, correlating logs across Google SecOps SIEM, SentinelOne EDR, and Akamai to separate false positives from actionable incidents.</li>
@@ -316,31 +317,41 @@
 
       <div class="card">
         <div class="card-top">
-          <h3>ML-Powered Malware Analysis Platform</h3>
+          <h3>Malware Analysis Platform</h3>
           <span class="badge wip">In progress</span>
         </div>
         <ul>
-          <li>Offline triage platform for Windows PE files combining static analysis, YARA rule matching, MITRE ATT&amp;CK technique mapping, and supervised classification.</li>
-          <li>Modular Python pipeline for PE feature extraction and automated classification, containerized in Docker.</li>
-          <li>Designed to run fully air-gapped so unknown samples never touch the network.</li>
+          <li>Self-hosted service for offline triage of Windows PE files: upload a sample, parse it with <code>pefile</code>, match it against YARA rules, and persist the results &mdash; nothing leaves the host.</li>
+          <li>Python 3.11 / FastAPI / SQLAlchemy backend with a React + TypeScript + Vite frontend. SQLite locally, PostgreSQL 16 in Docker.</li>
+          <li>Three-service Docker Compose stack (database, API, frontend) with named volumes for sample storage and rules mounted read-only.</li>
+          <li>Tested with pytest and httpx; type-checked with mypy; formatted with ruff and black.</li>
+          <li>Classification is a heuristic placeholder today. Supervised ML and MITRE ATT&amp;CK technique mapping are the next milestones.</li>
         </ul>
         <div class="tags">
-          <span class="tag">Python</span><span class="tag">YARA</span><span class="tag">Docker</span>
-          <span class="tag">scikit-learn</span><span class="tag">MITRE ATT&amp;CK</span>
+          <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">SQLAlchemy</span>
+          <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Vite</span>
+          <span class="tag">Docker Compose</span><span class="tag">PostgreSQL</span>
+          <span class="tag">YARA</span><span class="tag">pefile</span><span class="tag">pytest</span><span class="tag">mypy</span>
         </div>
       </div>
 
       <div class="card">
+        <img class="shot" src="assets/worldcup-results.png" alt="Chart: model called 62 of 102 World Cup results correctly, 73 percent in the knockout rounds">
         <div class="card-top">
-          <h3>Sports Outcome Prediction Engine</h3>
+          <h3>World Cup Prediction Model</h3>
         </div>
         <ul>
-          <li>End-to-end machine learning pipelines predicting NBA game outcomes and FIFA World Cup results, trained on all available historical game data for both competitions.</li>
-          <li>Engineered team- and game-level features and benchmarked multiple model families across training and evaluation runs.</li>
+          <li>Trained on <strong>49,000+ men's international match results since 1872</strong>, weighting recent matches more heavily than older ones so the model reads current form over history.</li>
+          <li>Tested a simple Elo rating system head-to-head against a Dixon-Coles goal model on the last four World Cups. The simpler Elo model predicted champions better, so I shipped it and dropped the more complex one.</li>
+          <li>Calibrated the randomness until favorites looked beatable rather than certain, then ran <strong>20,000 simulations</strong> of the full 48-team tournament.</li>
+          <li>Compared the output against betting markets and traced the largest disagreement &mdash; Argentina at 15% versus roughly 8% &mdash; to a real blind spot: the model sees only results, not squad age, injuries, or club form. That's what I'm adding next.</li>
+          <li>Backtested through the semifinals: <strong>62 of 102 results correct (61%), 73% in the knockout rounds</strong>, with 11 exact scorelines.</li>
         </ul>
+        <img class="shot" style="margin-top:18px;margin-bottom:0" src="assets/worldcup-validation.png" alt="Line chart showing prediction error rising as the Dixon-Coles goal model is blended in; pure Elo performed best">
         <div class="tags">
           <span class="tag">Python</span><span class="tag">pandas</span><span class="tag">NumPy</span>
-          <span class="tag">scikit-learn</span><span class="tag">XGBoost</span>
+          <span class="tag">SciPy</span><span class="tag">Elo</span><span class="tag">Dixon-Coles</span>
+          <span class="tag">Monte Carlo</span>
         </div>
       </div>
 
