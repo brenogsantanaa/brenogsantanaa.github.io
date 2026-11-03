@@ -2,492 +2,455 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Breno Santana | Cybersecurity &amp; Threat Intelligence</title>
-<meta name="description" content="Breno Garcia Santana — Computer Engineering student at Georgia Tech with a Cybersecurity concentration. SOC operations, cyber threat intelligence, and penetration testing.">
-<meta property="og:title" content="Breno Santana | Cybersecurity &amp; Threat Intelligence">
-<meta property="og:description" content="Computer Engineering @ Georgia Tech. SOC operations, cyber threat intelligence, penetration testing.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Breno Santana | Security, Computer Engineering at Georgia Tech</title>
+<meta name="description" content="Breno Garcia Santana studies Computer Engineering at Georgia Tech and works in security: SOC alert triage, threat intelligence, and web application testing. Looking for a Summer 2027 security internship.">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F5F1E8">
+<link rel="canonical" href="https://brenogsantanaa.github.io/">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://brenogsantanaa.github.io/">
+<meta property="og:title" content="Breno Santana | Security, Computer Engineering at Georgia Tech">
+<meta property="og:description" content="Computer Engineering at Georgia Tech. SOC alert triage, threat intelligence, and web application testing.">
+<meta property="og:image" content="https://brenogsantanaa.github.io/assets/headshot.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23B3431A'/%3E%3Ctext x='16' y='24' font-family='Georgia,serif' font-size='22' text-anchor='middle' fill='%23F5F1E8'%3EB%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/public-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+  /* Newsreader and Public Sans, SIL Open Font License, self-hosted latin subsets */
+  @font-face{font-family:Newsreader;src:url(assets/fonts/newsreader-latin.woff2) format("woff2");font-weight:400 600;font-display:swap}
+  @font-face{font-family:"Public Sans";src:url(assets/fonts/public-sans-latin.woff2) format("woff2");font-weight:400 600;font-display:swap}
+
   :root{
-    --bg:#0b0e14;
-    --bg-2:#11151f;
-    --panel:#141926;
-    --line:#232b3d;
-    --text:#e6eaf2;
-    --muted:#9aa5bd;
-    --dim:#6b768f;
-    --accent:#5ee2b0;
-    --accent-2:#69a8ff;
-    --max:1080px;
+    --paper:#F5F1E8;      /* Newsprint */
+    --ink:#1B1A17;        /* Ink */
+    --graphite:#57534B;   /* Graphite, secondary text */
+    --rule:#CFC7B6;       /* Rule, decorative lines only */
+    --blue:#1E4E8C;       /* Prussian Blue, links */
+    --terra:#B3431A;      /* Terracotta, numerals and section heads */
+    --ochre:#E9A93B;      /* Ochre, photo block, fills only */
+    --ultra:#24389C;      /* Ultramarine, results band */
+    --ultra-text:#DCE3FA; /* Pale Ultramarine, labels on the band */
+    --serif:Newsreader,Georgia,"Times New Roman",serif;
+    --sans:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    --gutter:40px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:var(--accent-2);text-decoration:none}
-  a:hover{text-decoration:underline}
-  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
-  .mono{font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{background:var(--paper);color:var(--ink);font:17px/1.6 var(--sans)}
+  img{max-width:100%;height:auto;display:block}
+  a{color:var(--blue);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+  a:hover{text-decoration-thickness:2px}
+  :focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+  .skip{position:absolute;left:16px;top:-60px;background:var(--ink);color:var(--paper);padding:10px 14px;z-index:10}
+  .skip:focus{top:12px}
+  .page{max-width:1200px;margin:0 auto;padding:0 var(--gutter)}
+  ul{list-style:none}
 
-  /* ---------- nav ---------- */
-  header{
-    position:sticky;top:0;z-index:50;
-    background:rgba(11,14,20,.85);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav{display:flex;align-items:center;justify-content:space-between;height:62px}
-  .brand{font-weight:650;letter-spacing:.2px}
-  .brand span{color:var(--accent)}
-  .nav ul{display:flex;gap:26px;list-style:none}
-  .nav a{color:var(--muted);font-size:14.5px}
-  .nav a:hover{color:var(--text);text-decoration:none}
-  .menu-btn{display:none;background:none;border:1px solid var(--line);color:var(--text);
-    border-radius:8px;padding:6px 10px;font-size:16px;cursor:pointer}
+  /* masthead */
+  .mast{display:flex;justify-content:space-between;align-items:baseline;gap:8px 24px;padding:22px 0 14px;border-bottom:3px double var(--terra);font-size:15px}
+  .mast b{font-weight:600}
+  .mast nav ul{display:flex;flex-wrap:wrap;gap:6px 24px}
+  .mast nav a{color:var(--ink);text-decoration:none}
+  .mast nav a:hover{text-decoration:underline}
 
-  /* ---------- hero ---------- */
-  .hero{padding:76px 0 64px;border-bottom:1px solid var(--line)}
-  .hero-grid{display:grid;grid-template-columns:1.35fr .85fr;gap:52px;align-items:center}
-  .eyebrow{
-    font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--accent);margin-bottom:16px;
-  }
-  h1{font-size:clamp(30px,4.6vw,46px);line-height:1.12;letter-spacing:-.02em;font-weight:680}
-  .lede{color:var(--muted);font-size:17px;margin-top:20px;max-width:56ch}
-  .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-  .btn{
-    display:inline-block;padding:11px 20px;border-radius:9px;font-size:14.5px;font-weight:560;
-    border:1px solid var(--line);color:var(--text);
-  }
-  .btn:hover{text-decoration:none;border-color:var(--dim)}
-  .btn.primary{background:var(--accent);color:#07231a;border-color:var(--accent)}
-  .btn.primary:hover{filter:brightness(1.07)}
-  .status{
-    margin-top:28px;padding-top:22px;border-top:1px solid var(--line);
-    display:flex;flex-wrap:wrap;gap:10px 20px;font-size:13.5px;color:var(--dim);
-  }
-  .chip{
-    display:inline-flex;align-items:center;gap:8px;
-    background:var(--panel);border:1px solid var(--line);
-    border-radius:999px;padding:6px 14px;color:var(--muted);font-size:13px;
-  }
-  .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
-  .portrait{
-    width:100%;border-radius:14px;border:1px solid var(--line);display:block;
-    filter:saturate(.95);
-  }
+  /* hero */
+  .hero{display:grid;grid-template-columns:repeat(12,1fr);gap:0 32px;padding:56px 0 64px}
+  .hero-text{grid-column:1/8}
+  .hero h1{font-family:var(--serif);font-weight:500;font-size:76px;line-height:1;letter-spacing:-.01em}
+  .stand{font-family:var(--serif);font-size:27px;line-height:1.35;margin-top:28px;max-width:30ch}
+  .avail{margin-top:22px;color:var(--graphite)}
+  .links{margin-top:34px;display:flex;flex-wrap:wrap;border-top:1px solid var(--rule)}
+  .links a{padding:12px 28px 12px 0;font-weight:500}
+  .hero figure{grid-column:9/13;align-self:start}
+  .hero img{width:100%;box-shadow:14px 14px 0 var(--ochre)}
 
-  /* ---------- sections ---------- */
-  section{padding:72px 0;border-bottom:1px solid var(--line)}
-  .kicker{
-    font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--dim);margin-bottom:12px;
-  }
-  h2{font-size:clamp(23px,3vw,31px);letter-spacing:-.015em;font-weight:660;margin-bottom:14px}
-  .sub{color:var(--muted);max-width:70ch;margin-bottom:34px}
-  h3{font-size:18px;font-weight:620;letter-spacing:-.01em}
+  /* sections */
+  .sec{border-top:1px solid var(--ink);padding:20px 0 24px}
+  .sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:12px}
+  .sec-head h2{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--terra)}
+  .sec-head p{font-size:15px;color:var(--graphite)}
 
-  .prose p{color:var(--muted);max-width:68ch;margin-bottom:16px}
-  .prose strong{color:var(--text);font-weight:600}
+  /* case studies */
+  .case{display:grid;grid-template-columns:repeat(12,1fr);gap:0 32px;padding:36px 0 64px}
+  .case + .case{border-top:1px solid var(--rule)}
+  .case-no{grid-column:1/3;font-family:var(--serif);font-size:64px;line-height:.9;color:var(--terra)}
+  .case-main{grid-column:3/13;min-width:0}
+  .case h3{font-family:var(--serif);font-weight:500;font-size:44px;line-height:1.08;max-width:22ch}
+  .case .meta{margin-top:14px;font-size:15px;color:var(--graphite)}
+  .case .meta strong{color:var(--ink);font-weight:600}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:34px}
+  h4{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;border-top:1px solid var(--ink);padding-top:8px;margin-bottom:8px}
+  .cols p{max-width:48ch}
+  .cols p + p{margin-top:12px}
+  .cols.one{grid-template-columns:1fr}
+  .cols.one p{max-width:72ch}
+  .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:40px;background:var(--ultra);color:var(--paper);padding:26px 28px}
+  .fig b{display:block;font-family:var(--serif);font-weight:500;font-size:48px;line-height:1}
+  .fig span{display:block;font-size:14.5px;color:var(--ultra-text);margin-top:8px;max-width:24ch}
+  .foot{margin-top:28px;display:grid;grid-template-columns:auto 1fr;gap:6px 20px;font-size:15px;border-top:1px solid var(--rule);padding-top:12px}
+  .foot dt{color:var(--graphite)}
 
-  /* ---------- cards ---------- */
-  .card{
-    background:var(--bg-2);border:1px solid var(--line);border-radius:13px;
-    padding:26px 26px 22px;margin-bottom:18px;
-  }
-  .card-top{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;justify-content:space-between}
-  .meta{color:var(--dim);font-size:13.5px}
-  .org{color:var(--accent);font-weight:560}
-  .card ul{margin:16px 0 0 0;padding-left:0;list-style:none}
-  .card li{
-    position:relative;padding-left:20px;margin-bottom:9px;color:var(--muted);font-size:15px;
-  }
-  .card li::before{
-    content:"";position:absolute;left:2px;top:9px;width:6px;height:6px;
-    border-radius:1.5px;background:var(--line);border:1px solid var(--dim);
-  }
-  .card li:last-child{margin-bottom:0}
+  figcaption.cap{font-size:14px;color:var(--graphite);margin-top:10px}
+  figcaption.cap b{color:var(--ink);font-weight:600}
 
-  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
-  .tag{
-    font-size:12px;padding:4px 10px;border-radius:6px;
-    background:var(--panel);border:1px solid var(--line);color:var(--muted);
+  /* charts */
+  .charts{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:40px}
+  .chart{width:100%;height:auto;display:block;overflow:visible;font-family:var(--sans)}
+  .chart .grid{stroke:var(--rule);stroke-width:1}
+  .chart .axis{stroke:var(--ink);stroke-width:1}
+  .chart .tick{font-size:12.5px;fill:var(--graphite)}
+  .chart .lab{font-size:14px;fill:var(--ink)}
+  .chart .val{font-size:13.5px;fill:var(--ink);font-weight:500}
+  .chart .mark{fill:var(--ultra)}
+  .chart .line{fill:none;stroke:var(--ultra);stroke-width:2;stroke-linejoin:round}
+  .chart .dot{fill:var(--ultra);stroke:var(--paper);stroke-width:2}
+
+  /* smaller projects */
+  .small{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:8px}
+  .small h3{font-size:30px;max-width:none}
+  .small p{margin-top:12px;max-width:52ch}
+  .small img{margin-top:18px;border:1px solid var(--rule)}
+
+  /* experience */
+  .job{display:grid;grid-template-columns:repeat(12,1fr);gap:0 32px;padding:28px 0 32px}
+  .job + .job{border-top:1px solid var(--rule)}
+  .job-when{grid-column:1/4;font-size:15px;color:var(--graphite)}
+  .job-when b{display:block;color:var(--ink);font-weight:600;font-size:16px}
+  .job-main{grid-column:4/13}
+  .job h3{font-family:var(--serif);font-weight:500;font-size:30px;line-height:1.15}
+  .job .role{font-size:16px;margin-top:4px}
+  .bul{margin-top:14px}
+  .bul li{position:relative;padding-left:22px;margin-top:8px;max-width:72ch}
+  .bul li::before{content:"";position:absolute;left:0;top:.75em;width:10px;height:2px;background:var(--terra)}
+
+  /* swimming */
+  .swim{display:grid;grid-template-columns:repeat(12,1fr);gap:0 32px;padding:20px 0 56px}
+  .swim p{grid-column:1/7;font-family:var(--serif);font-size:27px;line-height:1.35}
+  .swim ul{grid-column:8/13;border-top:1px solid var(--ink)}
+  .swim li{padding:12px 0;border-bottom:1px solid var(--rule)}
+
+  /* education and skills */
+  .edu{display:grid;grid-template-columns:repeat(12,1fr);gap:0 32px;padding:20px 0 56px}
+  .edu-main{grid-column:1/7}
+  .edu-main h3{font-family:var(--serif);font-weight:500;font-size:34px;line-height:1.15}
+  .edu-main ul{margin-top:16px}
+  .edu-main li{margin-top:2px}
+  .edu-side{grid-column:8/13}
+  .edu-side h4{margin-top:0}
+  .edu-side ul + h4{margin-top:24px}
+  .edu-side li{margin-top:4px}
+  .skills{grid-column:1/13;margin-top:48px;display:grid;grid-template-columns:200px 1fr;border-top:1px solid var(--ink)}
+  .skills dt,.skills dd{padding:12px 0;border-bottom:1px solid var(--rule)}
+  .skills dt{font-weight:600}
+
+  /* contact */
+  .contact{padding:20px 0 64px}
+  .contact ul{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;border-top:1px solid var(--ink)}
+  .contact li{padding-top:12px}
+  .contact .k{display:block;font-size:14px;color:var(--graphite)}
+  .contact a{font-size:18px;font-weight:500;overflow-wrap:anywhere}
+  footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 24px;border-top:3px double var(--terra);padding:16px 0 40px;font-size:15px;color:var(--graphite)}
+
+  @media (max-width:980px){
+    .hero h1{font-size:60px}
+    .stand{font-size:23px}
+    .figs{grid-template-columns:1fr 1fr;gap:24px}
+    .contact ul{grid-template-columns:1fr 1fr}
+    .links{flex-direction:column;border-top:none;margin-top:24px}
+    .links a{border-top:1px solid var(--rule);padding:13px 0;display:flex;justify-content:space-between}
+    .links a::after{content:"\2192";text-decoration:none}
   }
-
-  /* ---------- education / skills ---------- */
-  .split{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-  .skill-row{display:grid;grid-template-columns:132px 1fr;gap:14px;margin-bottom:14px;font-size:14.7px}
-  .skill-row b{color:var(--text);font-weight:600}
-  .skill-row span{color:var(--muted)}
-
-  /* ---------- projects ---------- */
-  .proj{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-  .proj .card{margin-bottom:0;display:flex;flex-direction:column}
-  .shot{
-    width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:9px;
-    border:1px solid var(--line);margin-bottom:18px;background:var(--panel);
-  }
-  .badge{
-    font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
-    color:#07231a;background:var(--accent);border-radius:5px;padding:3px 8px;font-weight:650;
-  }
-  .badge.wip{background:var(--accent-2);color:#04162e}
-
-  /* ---------- contact ---------- */
-  .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
-  .contact-grid .card{margin:0}
-  .contact-grid .label{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:7px}
-  footer{padding:34px 0 44px;color:var(--dim);font-size:13.5px;display:flex;
-    justify-content:space-between;flex-wrap:wrap;gap:12px}
-
-  @media (max-width:860px){
-    .hero-grid,.proj,.split{grid-template-columns:1fr}
-    .hero-grid{gap:36px}
-    .portrait{max-width:340px}
-    .contact-grid{grid-template-columns:1fr}
-    .nav ul{
-      display:none;position:absolute;top:62px;left:0;right:0;
-      flex-direction:column;gap:0;background:var(--bg-2);
-      border-bottom:1px solid var(--line);padding:8px 24px 16px;
-    }
-    .nav ul.open{display:flex}
-    .nav ul li{padding:9px 0;border-bottom:1px solid var(--line)}
-    .menu-btn{display:block}
-    .skill-row{grid-template-columns:1fr;gap:2px}
-    section{padding:56px 0}
+  @media (max-width:760px){
+    :root{--gutter:16px}
+    body{font-size:16.5px}
+    .mast{flex-direction:column;padding:16px 0 10px}
+    .mast nav ul{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:4px 24px}
+    .hero{display:flex;flex-direction:column;padding:24px 0 40px}
+    .hero figure{order:-1;width:48%;margin-bottom:30px}
+    .hero h1{font-size:46px}
+    .stand{font-size:21px;margin-top:16px}
+    .case{display:block;padding:24px 0 44px}
+    .case-no{font-size:40px;margin-bottom:6px}
+    .case h3{font-size:31px}
+    .cols{grid-template-columns:1fr;gap:22px}
+    .figs{gap:22px 16px;padding:20px 16px;margin-left:-16px;margin-right:-16px}
+    .fig b{font-size:38px}
+    .charts,.small{grid-template-columns:1fr;gap:28px}
+    .chart .tick{font-size:17px}
+    .chart .lab{font-size:19px}
+    .chart .val{font-size:18px}
+    .small h3{font-size:26px}
+    .job,.swim,.edu{display:block}
+    .job-when{margin-bottom:8px}
+    .job-when b{display:inline;margin-right:8px}
+    .job h3{font-size:26px}
+    .swim p{font-size:22px;margin-bottom:20px}
+    .edu-side{margin-top:28px}
+    .skills{grid-template-columns:1fr}
+    .skills dt{border-bottom:none;padding-bottom:0}
+    .skills dd{padding-top:2px}
+    .contact ul{grid-template-columns:1fr;gap:0}
+    .contact li{border-bottom:1px solid var(--rule);padding:12px 0}
   }
 </style>
 </head>
 <body id="top">
-
-<header>
-  <div class="wrap nav">
-    <div class="brand">Breno<span>.</span>Santana</div>
-    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
-    <ul id="menu">
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#resume">Resume</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </div>
-</header>
-
-<!-- ============ HERO ============ -->
-<div class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <div class="eyebrow">Computer Engineering @ Georgia Tech</div>
-      <h1>Cybersecurity, threat intelligence,<br>and security operations.</h1>
-      <p class="lede">
-        Three internships across the defensive, intelligence, and offensive sides of security:
-        a SOC in Brazil, cyber threat intelligence for a firm in Tel Aviv, and information
-        security at a bank in Sao Paulo.
-      </p>
-      <div class="cta">
-        <a class="btn primary" href="assets/Breno_Santana_Resume.pdf">Download resume</a>
-        <a class="btn" href="mailto:brenosantanaa13@gmail.com">Email me</a>
-        <a class="btn" href="https://www.linkedin.com/in/breno-garcia-santana/" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn" href="https://github.com/brenogsantanaa" target="_blank" rel="noopener">GitHub</a>
-      </div>
-      <div class="status">
-        <span class="chip"><span class="dot"></span>Open to Summer 2027 internships &amp; full-time from Dec 2027</span>
-        <span class="chip">Atlanta, GA</span>
-        <span class="chip">PT · EN · ES</span>
-      </div>
-    </div>
-    <div>
-      <img class="portrait"
-           src="https://static.wixstatic.com/media/b38f93_85733ff4871a4b059a6a85fbb6f99a2a~mv2.png/v1/fill/w_621,h_682,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/professional-Headshot.png"
-           alt="Portrait of Breno Santana">
-    </div>
-  </div>
-</div>
-
-<!-- ============ ABOUT ============ -->
-<section id="about">
-  <div class="wrap">
-    <div class="kicker">About</div>
-    <h2>Security work, from three different angles</h2>
-    <div class="prose">
-      <p>
-        I'm a junior at Georgia Tech studying Computer Engineering with a concentration in
-        <strong>Cybersecurity and Distributed Systems/Software Design</strong>. Originally from Brazil,
-        and a former student-athlete, I bring twelve years of the work ethic and mentality that came
-        from being a D1 and professional swimmer, paired with three internships across the defensive,
-        intelligence, and offensive sides of security.
-      </p>
-      <p>
-        I started in a SOC at Positivo S+, triaging alerts in QRadar and learning to tell a real
-        incident from noise. From there I moved into cyber threat intelligence at KELA, tracking
-        Brazilian cybercrime across Telegram. I'm now at Banco Rendimento, working alerts across
-        Google SecOps and SentinelOne, running web application penetration tests, and contributing
-        to security policy and controls under LGPD and BACEN regulations.
-      </p>
-      <p>
-        On my own time I'm building a self-hosted malware triage platform for Windows PE files &mdash;
-        a FastAPI and React service that parses samples and matches them against YARA rules, with
-        ML classification as the next milestone.
-      </p>
-      <p>
-        Looking for a cybersecurity analyst internship for Summer 2027 and full-time roles from
-        December 2027.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ EXPERIENCE ============ -->
-<section id="experience">
-  <div class="wrap">
-    <div class="kicker">Experience</div>
-    <h2>Where I've worked</h2>
-    <p class="sub">Three security internships across defensive operations, cyber threat intelligence, and application security.</p>
-
-    <div class="card">
-      <div class="card-top">
-        <h3>Information Security Intern · <span class="org">Banco Rendimento</span></h3>
-        <div class="meta">Sao Paulo, Brazil · Jul 2026 – Present</div>
-      </div>
+<a class="skip" href="#main">Skip to content</a>
+<div class="page">
+  <header class="mast">
+    <b>Breno Garcia Santana</b>
+    <nav aria-label="Sections">
       <ul>
-        <li>Triage 10–15 alerts and investigations per week, correlating logs across Google SecOps SIEM, SentinelOne EDR, and Akamai to separate false positives from actionable incidents.</li>
-        <li>Executed 3 web application penetration tests with Burp Suite, presenting findings to developers and supporting remediation.</li>
-        <li>Maintain and troubleshoot Datadog, Cisco Umbrella, and Trellix DLP deployments, resolving configuration and coverage issues.</li>
-        <li>Contribute to security policy and control documentation under LGPD and BACEN regulations; help develop internal phishing training.</li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#swimming">Swimming</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
-      <div class="tags">
-        <span class="tag">Google SecOps SIEM</span><span class="tag">SentinelOne EDR</span>
-        <span class="tag">Trellix DLP</span><span class="tag">Akamai</span>
-        <span class="tag">Burp Suite</span><span class="tag">LGPD / BACEN</span>
+    </nav>
+  </header>
+
+  <main id="main">
+  <section class="hero" aria-label="Introduction">
+    <div class="hero-text">
+      <h1>Breno Santana</h1>
+      <p class="stand">I study Computer Engineering at Georgia Tech and work in security, from SOC alert triage to threat intelligence and web application testing.</p>
+      <p class="avail">Looking for a Summer 2027 security internship. Based in Atlanta.</p>
+      <div class="links">
+        <a href="assets/Breno_Santana_Resume.pdf" type="application/pdf">Resume (PDF)</a>
+        <a href="mailto:brenosantanaa13@gmail.com">brenosantanaa13@gmail.com</a>
+        <a href="https://www.linkedin.com/in/breno-garcia-santana/" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/brenogsantanaa" rel="noopener">GitHub</a>
       </div>
     </div>
+    <figure>
+      <img src="assets/headshot.jpg" srcset="assets/headshot-400.jpg 364w, assets/headshot.jpg 621w" sizes="(max-width:760px) 48vw, (max-width:1200px) 30vw, 352px" alt="Portrait of Breno Santana" width="621" height="682" fetchpriority="high">
+    </figure>
+  </section>
 
-    <div class="card">
-      <div class="card-top">
-        <h3>Cyber Threat Intelligence Intern · <span class="org">KELA</span></h3>
-        <div class="meta">Tel Aviv, Israel (Remote) · May – Jul 2026</div>
+  <!-- ============ PROJECTS ============ -->
+  <section class="sec" id="projects">
+    <div class="sec-head"><h2>Projects</h2><p>Two case studies and two smaller builds</p></div>
+
+    <article class="case" aria-labelledby="p1">
+      <div class="case-no" aria-hidden="true">01</div>
+      <div class="case-main">
+        <h3 id="p1">Voice Deepfake Detection for Brazilian Portuguese</h3>
+        <p class="meta"><strong>In progress.</strong> Started August 2026.</p>
+
+        <div class="cols">
+          <div><h4>Problem</h4><p>Detect synthetic speech in Brazilian Portuguese, including audio that has passed through a phone line.</p></div>
+          <div><h4>What I built</h4><p>A probe on WavLM features that labels clips as real or synthetic, trained on Portuguese deepfake data. I used ffmpeg to simulate phone-line audio (G.711) and test how the probe holds up.</p><p>The pipeline is zero persistence and aligned with LGPD: audio is processed and not stored.</p></div>
+        </div>
+
+        <div class="figs">
+          <div class="fig"><b>2.6%</b><span>Equal error rate for the WavLM probe</span></div>
+          <div class="fig"><b>+10.3</b><span>Points of error added by G.711 phone audio on unseen generators</span></div>
+          <div class="fig"><b>4</b><span>Dataset shortcuts found that the model could exploit</span></div>
+          <div class="fig"><b>2,481</b><span>Evaluation clips misaligned by a bug I found</span></div>
+        </div>
+
+        <div class="cols">
+          <div><h4>What went wrong</h4><p>My own real WhatsApp voice notes scored as fake. That suggests the probe learned the dataset's recording conditions, not just the deepfakes.</p></div>
+          <div><h4>What I learned</h4><p>Phone audio is the hard case. Passing audio through G.711 raised the error by 10.3 points on generators the model had not seen.</p></div>
+        </div>
+        <div class="cols one">
+          <div><h4>Problems I found</h4><p>Auditing the data turned up four shortcuts the model could learn instead of the voice itself, and a bug that misaligned 2,481 evaluation clips.</p><p>I also showed that a peer-reviewed dataset's published baselines used the wrong sample rate. I reproduced the authors' scores exactly (r = 1.000000), then traced the cause: real and fake clips at their native rates went into a model built for 16 kHz audio.</p></div>
+        </div>
+
+        <dl class="foot"><dt>Stack</dt><dd>Python, PyTorch, WavLM, ffmpeg</dd></dl>
       </div>
+    </article>
+
+
+    <article class="case" aria-labelledby="p2">
+      <div class="case-no" aria-hidden="true">02</div>
+      <div class="case-main">
+        <h3 id="p2">World Cup Prediction Model</h3>
+
+        <div class="cols">
+          <div><h4>Problem</h4><p>Predict the 48-team 2026 World Cup from international match results, then check the predictions against what actually happened.</p></div>
+          <div><h4>What I built</h4><p>A match model trained on 49,372 men's international results since 1872, using only information available before kickoff. Elo ratings, recent form, rest days and head-to-head record feed a logistic regression, and a Dixon-Coles goal model predicts scorelines.</p><p>The match probabilities drive a Monte Carlo simulator that plays the full tournament 20,000 times.</p></div>
+        </div>
+
+        <div class="figs">
+          <div class="fig"><b>61%</b><span>Group-stage results called correctly, 44 of 72</span></div>
+          <div class="fig"><b>7</b><span>Exact scorelines in the group stage</span></div>
+          <div class="fig"><b>256</b><span>World Cup matches used to choose the model</span></div>
+          <div class="fig"><b>20,000</b><span>Simulations of the full tournament</span></div>
+        </div>
+
+        <div class="charts">
+          <figure>
+            <svg class="chart" viewBox="0 0 540 232" role="img" aria-labelledby="c1t c1d"><title id="c1t">Group-stage results called correctly, by matchday</title><desc id="c1d">Matchday 1: 12 of 24 correct, 1 exact. Matchday 2: 19 of 24, 5 exact. Matchday 3: 13 of 24, 1 exact. Total 44 of 72, 7 exact.</desc><line x1="110.0" y1="12" x2="110.0" y2="178" class="grid"/><text x="110.0" y="198" class="tick" text-anchor="middle">0</text><line x1="185.0" y1="12" x2="185.0" y2="178" class="grid"/><text x="185.0" y="198" class="tick" text-anchor="middle">6</text><line x1="260.0" y1="12" x2="260.0" y2="178" class="grid"/><text x="260.0" y="198" class="tick" text-anchor="middle">12</text><line x1="335.0" y1="12" x2="335.0" y2="178" class="grid"/><text x="335.0" y="198" class="tick" text-anchor="middle">18</text><line x1="410.0" y1="12" x2="410.0" y2="178" class="grid"/><text x="410.0" y="198" class="tick" text-anchor="middle">24</text><line x1="110" y1="12" x2="110" y2="178" class="axis"/><g><title>Matchday 1: 12 of 24 results correct, 1 exact scoreline</title><rect x="0" y="10" width="540" height="50" fill="transparent"/><text x="0" y="40" class="lab">Matchday 1</text><path d="M110 20h146.0a4 4 0 0 1 4 4v22a4 4 0 0 1 -4 4h-146.0z" class="mark"/><text x="268.0" y="40" class="val">12 of 24, 1 exact</text></g><g><title>Matchday 2: 19 of 24 results correct, 5 exact scorelines</title><rect x="0" y="66" width="540" height="50" fill="transparent"/><text x="0" y="96" class="lab">Matchday 2</text><path d="M110 76h233.5a4 4 0 0 1 4 4v22a4 4 0 0 1 -4 4h-233.5z" class="mark"/><text x="355.5" y="96" class="val">19 of 24, 5 exact</text></g><g><title>Matchday 3: 13 of 24 results correct, 1 exact scoreline</title><rect x="0" y="122" width="540" height="50" fill="transparent"/><text x="0" y="152" class="lab">Matchday 3</text><path d="M110 132h158.5a4 4 0 0 1 4 4v22a4 4 0 0 1 -4 4h-158.5z" class="mark"/><text x="280.5" y="152" class="val">13 of 24, 1 exact</text></g><text x="260" y="228" class="tick" text-anchor="middle">Results called correctly, out of 24 matches</text></svg>
+            <figcaption class="cap"><b>Figure 1.</b> Group-stage results called correctly by the Dixon-Coles goal model, by matchday. 44 of 72 overall, with 7 exact scorelines.</figcaption>
+          </figure>
+          <figure>
+            <svg class="chart" viewBox="0 0 540 290" role="img" aria-labelledby="c2t c2d"><title id="c2t">Champion log loss as the Dixon-Coles weight increases</title><desc id="c2d">Mean champion log loss over the 2010, 2014, 2018 and 2022 World Cups. Pure Elo (weight 0) is lowest at 1.950. Error rises steadily with more weight on the goal model, to 2.364 for pure Dixon-Coles.</desc><line x1="60" y1="240.0" x2="520" y2="240.0" class="grid"/><text x="52" y="244.0" class="tick" text-anchor="end">1.9</text><line x1="60" y1="196.0" x2="520" y2="196.0" class="grid"/><text x="52" y="200.0" class="tick" text-anchor="end">2.0</text><line x1="60" y1="152.0" x2="520" y2="152.0" class="grid"/><text x="52" y="156.0" class="tick" text-anchor="end">2.1</text><line x1="60" y1="108.0" x2="520" y2="108.0" class="grid"/><text x="52" y="112.0" class="tick" text-anchor="end">2.2</text><line x1="60" y1="64.0" x2="520" y2="64.0" class="grid"/><text x="52" y="68.0" class="tick" text-anchor="end">2.3</text><line x1="60" y1="20.0" x2="520" y2="20.0" class="grid"/><text x="52" y="24.0" class="tick" text-anchor="end">2.4</text><text x="60" y="260" class="tick" text-anchor="middle">0</text><text x="290.0" y="260" class="tick" text-anchor="middle">0.5</text><text x="520" y="260" class="tick" text-anchor="middle">1.0</text><line x1="60" y1="240" x2="520" y2="240" class="axis"/><polyline points="60.0,218.0 152.0,193.8 198.0,181.5 244.0,173.1 290.0,156.0 336.0,126.0 382.0,107.1 428.0,78.5 520.0,35.8" class="line"/><g><title>pure Elo: champion log loss 1.950</title><circle cx="60.0" cy="218.0" r="14" fill="transparent"/><circle cx="60.0" cy="218.0" r="6" class="dot"/></g><g><title>Dixon-Coles weight 0.2: champion log loss 2.005</title><circle cx="152.0" cy="193.8" r="14" fill="transparent"/><circle cx="152.0" cy="193.8" r="4" class="dot"/></g><g><title>Dixon-Coles weight 0.3: champion log loss 2.033</title><circle cx="198.0" cy="181.5" r="14" fill="transparent"/><circle cx="198.0" cy="181.5" r="4" class="dot"/></g><g><title>Dixon-Coles weight 0.4: champion log loss 2.052</title><circle cx="244.0" cy="173.1" r="14" fill="transparent"/><circle cx="244.0" cy="173.1" r="4" class="dot"/></g><g><title>Dixon-Coles weight 0.5: champion log loss 2.091</title><circle cx="290.0" cy="156.0" r="14" fill="transparent"/><circle cx="290.0" cy="156.0" r="4" class="dot"/></g><g><title>Dixon-Coles weight 0.6: champion log loss 2.159</title><circle cx="336.0" cy="126.0" r="14" fill="transparent"/><circle cx="336.0" cy="126.0" r="4" class="dot"/></g><g><title>Dixon-Coles weight 0.7: champion log loss 2.202</title><circle cx="382.0" cy="107.1" r="14" fill="transparent"/><circle cx="382.0" cy="107.1" r="4" class="dot"/></g><g><title>Dixon-Coles weight 0.8: champion log loss 2.267</title><circle cx="428.0" cy="78.5" r="14" fill="transparent"/><circle cx="428.0" cy="78.5" r="4" class="dot"/></g><g><title>pure Dixon-Coles: champion log loss 2.364</title><circle cx="520.0" cy="35.8" r="14" fill="transparent"/><circle cx="520.0" cy="35.8" r="4" class="dot"/></g><text x="74" y="232" class="val">Pure Elo, 1.950 (lowest)</text><text x="510" y="23.8" class="val" text-anchor="end">Pure Dixon-Coles, 2.364</text><text x="290" y="282" class="tick" text-anchor="middle">Weight on the Dixon-Coles goal model (0 is pure Elo)</text><text x="14" y="130" class="tick" text-anchor="middle" transform="rotate(-90 14 130)">Champion log loss</text></svg>
+            <figcaption class="cap"><b>Figure 2.</b> Champion log loss over the 2010 to 2022 World Cups. Lower is better. For picking champions, adding the goal model only made things worse.</figcaption>
+          </figure>
+        </div>
+
+        <div class="cols">
+          <div><h4>What went wrong</h4><p>My first 2022 backtest was overconfident about the favorites. The match probabilities were already calibrated, so the problem was the simulation treating each team's rating as exact across seven games.</p><p>I fixed it by giving every team a random strength offset in each simulation, tuned on the 2010 to 2022 World Cups.</p></div>
+          <div><h4>What I learned</h4><p>Fit before each 2010 to 2022 World Cup and scored on those 256 matches, no single model beat the Elo backbone. Blending it with the Dixon-Coles goal model beat all of them (log loss 0.9880 vs 0.9961), so that ensemble is the 2026 engine.</p><p>Picking champions was different: pure Elo did best there (Figure 2). XGBoost and extra features from goalscorer data did not beat the backbone either.</p></div>
+        </div>
+
+        <dl class="foot">
+          <dt>Stack</dt><dd>Python, pandas, NumPy, scikit-learn, XGBoost</dd>
+          <dt>Methods</dt><dd>Elo ratings, logistic regression, Dixon-Coles goal model, Monte Carlo simulation</dd>
+          <dt>Code</dt><dd><a href="https://github.com/brenogsantanaa/world-cup-2026-predictor" rel="noopener">github.com/brenogsantanaa/world-cup-2026-predictor</a></dd>
+        </dl>
+      </div>
+    </article>
+
+    <article class="case" aria-labelledby="p3">
+      <div class="case-no" aria-hidden="true">03</div>
+      <div class="case-main">
+        <h3 id="p3">Hardware and embedded</h3>
+        <div class="small">
+          <div>
+            <h4>Embedded 2D video game</h4>
+            <h3>Mbed, C</h3>
+            <p>A complete 2D game in C on the Mbed platform: game loop, hardware button input, sprite rendering, scoring, lives, power-ups, teleportation, and win and lose conditions.</p>
+            <p>The map runs on a custom hash table, with sprites I designed by hand for a small uLCD display. Everything had to fit real memory and performance limits.</p>
+            <img src="assets/mbed-game.jpg" srcset="assets/mbed-game-700.jpg 700w, assets/mbed-game.jpg 1200w" sizes="(max-width:760px) 100vw, 448px" alt="The handheld game on a breadboard with four push buttons, the uLCD screen showing the Cave Adventure start screen and high scores." width="1200" height="681" loading="lazy" decoding="async">
+          </div>
+          <div>
+            <h4>PCB design</h4>
+            <h3>Altium Designer</h3>
+            <p>I learned Altium Designer end to end: schematic symbols, footprints, wiring, and board layout for a 9V powered LED circuit.</p>
+            <p>I built reusable components, validated footprints, exported Gerber fabrication files, and reviewed the design in 3D to confirm it could be manufactured.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ EXPERIENCE ============ -->
+  <section class="sec" id="experience">
+    <div class="sec-head"><h2>Experience</h2><p>Three security internships</p></div>
+
+    <article class="job">
+      <div class="job-when"><b>Jul to Sep 2026</b>São Paulo, Brazil</div>
+      <div class="job-main">
+        <h3>Banco Rendimento</h3>
+        <p class="role">Information Security Intern</p>
+        <ul class="bul">
+          <li>Triaged 10 to 15 alerts and investigations per week, correlating logs across Google SecOps SIEM, SentinelOne EDR, and Akamai to separate false positives from actionable incidents.</li>
+          <li>Executed 3 web application penetration tests with Burp Suite, presenting findings to developers and supporting remediation.</li>
+          <li>Maintained and troubleshot Datadog, Cisco Umbrella, and Trellix DLP deployments, resolving configuration and coverage issues.</li>
+          <li>Contributed to security policy and control documentation under LGPD and BACEN regulations, and helped develop internal phishing training.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job">
+      <div class="job-when"><b>May to Jul 2026</b>Tel Aviv, Israel (remote)</div>
+      <div class="job-main">
+        <h3>KELA</h3>
+        <p class="role">Cyber Threat Intelligence Intern</p>
+        <ul class="bul">
+          <li>Reviewed 100+ Telegram channels tied to Brazilian cybercrime over a 7-week engagement, narrowing to 10 high-priority threat-actor channels distributing leaked databases, PIX fraud kits, carding services, and stealer logs.</li>
+          <li>Built a categorized threat-actor tracker mapping channel operators and cross-platform footprints, delivered to the intelligence lead.</li>
+          <li>Applied a structured discovery methodology across TGStat, Telemetr.io, and lyzem, cross-referencing dark web sources to validate attribution before escalation.</li>
+          <li>Operated a hardened collection environment (dedicated VirtualBox VM, isolated browser, VPN, Tor) per internal OPSEC policy.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job">
+      <div class="job-when"><b>Jun to Aug 2025</b>Uberlândia, Brazil (remote)</div>
+      <div class="job-main">
+        <h3>Positivo S+</h3>
+        <p class="role">Security Operations Center Intern</p>
+        <ul class="bul">
+          <li>Triaged 20 to 30 alerts per week in IBM QRadar, investigating each to determine whether activity was malicious, resolving non-critical cases independently and escalating critical findings to senior analysts.</li>
+          <li>Contacted employees and system owners directly to verify suspicious logins and unexplained log activity before escalating.</li>
+          <li>Performed vulnerability assessments with Nmap and analyzed packet captures in Wireshark to confirm or rule out intrusions.</li>
+          <li>Partnered with senior analysts to reduce false positives and document repeatable response procedures.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ SWIMMING ============ -->
+  <section class="sec" id="swimming">
+    <div class="sec-head"><h2>Swimming</h2></div>
+    <div class="swim">
+      <p>Former NCAA Division I swimmer at Georgia Tech.</p>
       <ul>
-        <li>Reviewed 100+ Telegram channels tied to Brazilian cybercrime over a 7-week engagement, narrowing to 10 high-priority threat-actor channels distributing leaked databases, PIX fraud kits, carding services, and stealer logs.</li>
-        <li>Built a categorized threat-actor tracker mapping channel operators and cross-platform footprints, delivered to the intelligence lead.</li>
-        <li>Applied a structured discovery methodology across TGStat, Telemetr.io, and lyzem, cross-referencing dark web sources to validate attribution before escalation.</li>
-        <li>Operated a hardened collection environment (dedicated VirtualBox VM, isolated browser, VPN, Tor) per internal OPSEC policy.</li>
+        <li>Top 10 all time in Georgia Tech program history</li>
+        <li>Multiple-time Brazilian junior national champion</li>
+        <li>Club team captain, 2019 to 2023</li>
       </ul>
-      <div class="tags">
-        <span class="tag">OSINT</span><span class="tag">Threat Intelligence</span>
-        <span class="tag">Telegram Investigation</span><span class="tag">Dark Web Research</span>
-        <span class="tag">OPSEC</span>
-      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <div class="card-top">
-        <h3>Security Operations Center Intern · <span class="org">Positivo S+</span></h3>
-        <div class="meta">Curitiba, Brazil · Jun – Aug 2025</div>
-      </div>
-      <ul>
-        <li>Triaged 20–30 alerts per week in IBM QRadar, investigating each to determine whether activity was malicious, resolving non-critical cases independently and escalating critical findings to senior analysts.</li>
-        <li>Contacted employees and system owners directly to verify suspicious logins and unexplained log activity before escalating.</li>
-        <li>Performed vulnerability assessments with Nmap and analyzed packet captures in Wireshark to confirm or rule out intrusions.</li>
-        <li>Partnered with senior analysts to reduce false positives and document repeatable response procedures.</li>
-      </ul>
-      <div class="tags">
-        <span class="tag">SOC Operations</span><span class="tag">IBM QRadar</span>
-        <span class="tag">Wireshark</span><span class="tag">Nmap</span><span class="tag">Incident Response</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PROJECTS ============ -->
-<section id="projects">
-  <div class="wrap">
-    <div class="kicker">Projects</div>
-    <h2>Learning by building and breaking</h2>
-    <p class="sub">Security tooling, machine learning, and low-level embedded work.</p>
-
-    <div class="proj">
-
-      <div class="card">
-        <div class="card-top">
-          <h3>Malware Analysis Platform</h3>
-          <span class="badge wip">In progress</span>
-        </div>
+  <!-- ============ EDUCATION & SKILLS ============ -->
+  <section class="sec" id="education">
+    <div class="sec-head"><h2>Education and skills</h2></div>
+    <div class="edu">
+      <div class="edu-main">
+        <h3>Georgia Institute of Technology</h3>
         <ul>
-          <li>Self-hosted service for offline triage of Windows PE files: upload a sample, parse it with <code>pefile</code>, match it against YARA rules, and persist the results &mdash; nothing leaves the host.</li>
-          <li>Python 3.11 / FastAPI / SQLAlchemy backend with a React + TypeScript + Vite frontend. SQLite locally, PostgreSQL 16 in Docker.</li>
-          <li>Three-service Docker Compose stack (database, API, frontend) with named volumes for sample storage and rules mounted read-only.</li>
-          <li>Tested with pytest and httpx; type-checked with mypy; formatted with ruff and black.</li>
-          <li>Classification is a heuristic placeholder today. Supervised ML and MITRE ATT&amp;CK technique mapping are the next milestones.</li>
+          <li>B.S. Computer Engineering</li>
+          <li>Concentration in Cybersecurity &amp; Distributed Systems</li>
+          <li>Minor in Applications of Artificial Intelligence and Machine Learning</li>
+          <li>Graduating December 2027. GPA 3.31.</li>
+          <li>Atlanta, GA</li>
         </ul>
-        <div class="tags">
-          <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">SQLAlchemy</span>
-          <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Vite</span>
-          <span class="tag">Docker Compose</span><span class="tag">PostgreSQL</span>
-          <span class="tag">YARA</span><span class="tag">pefile</span><span class="tag">pytest</span><span class="tag">mypy</span>
-        </div>
       </div>
-
-      <div class="card">
-        <img class="shot" src="assets/worldcup-results.png" alt="Chart: model called 62 of 102 World Cup results correctly, 73 percent in the knockout rounds">
-        <div class="card-top">
-          <h3>World Cup Prediction Model</h3>
-        </div>
-        <ul>
-          <li>Trained on <strong>49,000+ men's international match results since 1872</strong>, weighting recent matches more heavily than older ones so the model reads current form over history.</li>
-          <li>Tested a simple Elo rating system head-to-head against a Dixon-Coles goal model on the last four World Cups. The simpler Elo model predicted champions better, so I shipped it and dropped the more complex one.</li>
-          <li>Calibrated the randomness until favorites looked beatable rather than certain, then ran <strong>20,000 simulations</strong> of the full 48-team tournament.</li>
-          <li>Compared the output against betting markets and traced the largest disagreement &mdash; Argentina at 15% versus roughly 8% &mdash; to a real blind spot: the model sees only results, not squad age, injuries, or club form. That's what I'm adding next.</li>
-          <li>Backtested through the semifinals: <strong>62 of 102 results correct (61%), 73% in the knockout rounds</strong>, with 11 exact scorelines.</li>
-        </ul>
-        <img class="shot" style="margin-top:18px;margin-bottom:0" src="assets/worldcup-validation.png" alt="Line chart showing prediction error rising as the Dixon-Coles goal model is blended in; pure Elo performed best">
-        <div class="tags">
-          <span class="tag">Python</span><span class="tag">pandas</span><span class="tag">NumPy</span>
-          <span class="tag">SciPy</span><span class="tag">Elo</span><span class="tag">Dixon-Coles</span>
-          <span class="tag">Monte Carlo</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <img class="shot" src="https://brenogsantanaa.github.io/assets/mbed-game-1.jpg" alt="Mbed handheld game start screen">
-        <div class="card-top">
-          <h3>Embedded 2D Video Game (Mbed, C)</h3>
-        </div>
-        <ul>
-          <li>Built a complete embedded 2D game in C on the Mbed platform — game loop, hardware button input, sprite rendering, scoring, lives, power-ups, teleportation, and win/lose conditions.</li>
-          <li>Custom hash-table–based map system with manually designed sprites, optimized for a constrained uLCD display.</li>
-          <li>Low-level systems programming under real memory and performance limits.</li>
-        </ul>
-        <div class="tags">
-          <span class="tag">C</span><span class="tag">Mbed</span><span class="tag">Embedded Systems</span>
-          <span class="tag">Data Structures</span>
-        </div>
-      </div>
-
-      <div class="card">
-        <img class="shot" src="https://brenogsantanaa.github.io/assets/pcb-discovery.jpg" alt="PCB Discovery Project cover slide">
-        <div class="card-top">
-          <h3>PCB Design (Altium)</h3>
-        </div>
-        <ul>
-          <li>Learned Altium Designer end to end: schematic symbols, footprints, wiring, and board layout for a 9V-powered LED circuit.</li>
-          <li>Built reusable components, validated footprints, and exported Gerber fabrication files.</li>
-          <li>Reviewed the design in 3D to confirm manufacturability.</li>
-        </ul>
-        <div class="tags">
-          <span class="tag">Altium Designer</span><span class="tag">PCB Layout</span><span class="tag">Hardware</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============ EDUCATION & SKILLS ============ -->
-<section id="education">
-  <div class="wrap">
-    <div class="kicker">Education &amp; Skills</div>
-    <h2>Georgia Institute of Technology</h2>
-    <p class="sub">B.S. Computer Engineering — Cybersecurity &amp; Distributed Systems concentration ·
-      Expected December 2027 · GPA 3.27 · Dean's List (3 semesters)</p>
-
-    <div class="split">
-      <div class="card">
-        <h3>Relevant coursework</h3>
+      <div class="edu-side">
+        <h4>Relevant coursework</h4>
         <ul>
           <li>Computer Communications</li>
           <li>Computer Architecture, Systems &amp; Concurrency</li>
           <li>Programming Hardware/Software Systems</li>
           <li>Data Structures &amp; Algorithms</li>
-          <li>Digital System Design · Discrete Mathematics · Statistics</li>
+          <li>Digital System Design, Discrete Mathematics, Statistics</li>
         </ul>
-      </div>
-      <div class="card">
-        <h3>In progress — Fall 2026</h3>
+        <h4>In progress, Fall 2026</h4>
         <ul>
           <li>Internetwork Security</li>
           <li>Introduction to Computer Security</li>
-          <li>Advanced Programming Techniques</li>
         </ul>
-        <div class="tags">
-          <span class="tag">Google Cybersecurity Professional Certificate</span>
-        </div>
+        <h4>Certification</h4>
+        <ul><li>Google Cybersecurity Professional Certificate</li></ul>
       </div>
-    </div>
 
-    <div class="card" style="margin-top:18px">
-      <h3 style="margin-bottom:18px">Technical skills</h3>
-      <div class="skill-row"><b>Security</b><span>Incident Response · Threat Intelligence (CTI) · Detection Engineering · Vulnerability Management · Application Security · SOC Operations and Alert Triage · SIEM Log Correlation · Digital Forensics · Web Application Penetration Testing</span></div>
-      <div class="skill-row"><b>Tools</b><span>Google SecOps SIEM (Chronicle) · IBM QRadar · SentinelOne (EDR) · Trellix (DLP) · Datadog · Cisco Umbrella · Akamai · Burp Suite · Wireshark · Nmap · YARA · OSINT Framework · Tor · Oracle VirtualBox · Git</span></div>
-      <div class="skill-row"><b>Frameworks</b><span>MITRE ATT&amp;CK · NIST CSF · ISO 27001 · LGPD (Brazilian data protection) · BACEN (central bank)</span></div>
-      <div class="skill-row"><b>Networking</b><span>TCP/IP · DNS · HTTP/HTTPS · TLS · packet analysis · firewall rules · WAF/DNS filtering</span></div>
-      <div class="skill-row"><b>Programming</b><span>Python, Java, C (proficient) · C++, Bash, SQL, JavaScript (basic)</span></div>
-      <div class="skill-row"><b>Systems</b><span>macOS, Windows (proficient) · Linux (basic)</span></div>
-      <div class="skill-row"><b>Languages</b><span>Portuguese (native) · English (fluent) · Spanish (conversational)</span></div>
+      <dl class="skills">
+        <dt>Security</dt><dd>Incident response, threat intelligence (CTI), detection engineering, vulnerability management, application security, SOC operations and alert triage, SIEM log correlation, digital forensics, web application penetration testing</dd>
+        <dt>Tools</dt><dd>Google SecOps SIEM (Chronicle), IBM QRadar, SentinelOne (EDR), Trellix (DLP), Datadog, Cisco Umbrella, Akamai, Burp Suite, Wireshark, Nmap, YARA, OSINT Framework, Tor, Oracle VirtualBox, Git</dd>
+        <dt>Frameworks</dt><dd>MITRE ATT&amp;CK, NIST CSF, ISO 27001, LGPD (Brazilian data protection), BACEN (central bank)</dd>
+        <dt>Networking</dt><dd>TCP/IP, DNS, HTTP/HTTPS, TLS, packet analysis, firewall rules, WAF/DNS filtering</dd>
+        <dt>Programming</dt><dd>Python, Java, C (proficient). C++, Bash, SQL, JavaScript (basic).</dd>
+        <dt>Systems</dt><dd>macOS, Windows (proficient). Linux (basic).</dd>
+        <dt>Languages</dt><dd>Portuguese (native), English (fluent), Spanish (conversational)</dd>
+      </dl>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ RESUME ============ -->
-<section id="resume">
-  <div class="wrap">
-    <div class="kicker">Resume</div>
-    <h2>One page, current as of August 2026</h2>
-    <p class="sub">Experience, projects, coursework, and technical skills.</p>
-    <div class="cta" style="margin-top:0">
-      <a class="btn primary" href="assets/Breno_Santana_Resume.pdf">Download PDF</a>
-      <a class="btn" href="mailto:brenosantanaa13@gmail.com">Request more detail</a>
+  <!-- ============ CONTACT ============ -->
+  <section class="sec" id="contact">
+    <div class="sec-head"><h2>Contact</h2></div>
+    <div class="contact">
+      <ul>
+        <li><span class="k">Email</span><a href="mailto:brenosantanaa13@gmail.com">brenosantanaa13@gmail.com</a></li>
+        <li><span class="k">LinkedIn</span><a href="https://www.linkedin.com/in/breno-garcia-santana/" rel="noopener">breno-garcia-santana</a></li>
+        <li><span class="k">GitHub</span><a href="https://github.com/brenogsantanaa" rel="noopener">brenogsantanaa</a></li>
+        <li><span class="k">Resume</span><a href="assets/Breno_Santana_Resume.pdf" type="application/pdf">PDF, one page</a></li>
+      </ul>
     </div>
-  </div>
-</section>
+  </section>
+  </main>
 
-<!-- ============ CONTACT ============ -->
-<section id="contact" style="border-bottom:none">
-  <div class="wrap">
-    <div class="kicker">Contact</div>
-    <h2>Let's build secure systems.</h2>
-    <p class="sub">Open to Summer 2027 internships and full-time roles from December 2027 — security analyst, SOC, threat intelligence, and detection engineering.</p>
-    <div class="contact-grid">
-      <div class="card">
-        <div class="label">Email</div>
-        <a href="mailto:brenosantanaa13@gmail.com">brenosantanaa13@gmail.com</a>
-      </div>
-      <div class="card">
-        <div class="label">LinkedIn</div>
-        <a href="https://www.linkedin.com/in/breno-garcia-santana/" target="_blank" rel="noopener">breno-garcia-santana</a>
-      </div>
-      <div class="card">
-        <div class="label">GitHub</div>
-        <a href="https://github.com/brenogsantanaa" target="_blank" rel="noopener">@brenogsantanaa</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="wrap">
   <footer>
-    <div>© 2026 Breno Garcia Santana · Atlanta, GA</div>
-    <div><a href="#top">Back to top ↑</a></div>
+    <span>© 2026 Breno Garcia Santana</span>
+    <a href="#top">Back to top</a>
   </footer>
 </div>
-
-<script>
-  var btn = document.getElementById('menuBtn');
-  var menu = document.getElementById('menu');
-  btn.addEventListener('click', function () {
-    var open = menu.classList.toggle('open');
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  menu.addEventListener('click', function (e) {
-    if (e.target.tagName === 'A') { menu.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
-  });
-</script>
 </body>
 </html>
