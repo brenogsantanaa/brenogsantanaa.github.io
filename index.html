@@ -84,6 +84,8 @@
   h4{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;border-top:1px solid var(--ink);padding-top:8px;margin-bottom:8px}
   .cols p{max-width:48ch}
   .cols p + p{margin-top:12px}
+  .cols.one{grid-template-columns:1fr}
+  .cols.one p{max-width:72ch}
   .figs{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:40px;background:var(--ultra);color:var(--paper);padding:26px 28px}
   .fig b{display:block;font-family:var(--serif);font-weight:500;font-size:48px;line-height:1}
   .fig span{display:block;font-size:14.5px;color:var(--ultra-text);margin-top:8px;max-width:24ch}
@@ -95,7 +97,15 @@
 
   /* charts */
   .charts{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:40px}
-  .charts img{border:1px solid var(--rule);background:#fff}
+  .chart{width:100%;height:auto;display:block;overflow:visible;font-family:var(--sans)}
+  .chart .grid{stroke:var(--rule);stroke-width:1}
+  .chart .axis{stroke:var(--ink);stroke-width:1}
+  .chart .tick{font-size:12.5px;fill:var(--graphite)}
+  .chart .lab{font-size:14px;fill:var(--ink)}
+  .chart .val{font-size:13.5px;fill:var(--ink);font-weight:500}
+  .chart .mark{fill:var(--ultra)}
+  .chart .line{fill:none;stroke:var(--ultra);stroke-width:2;stroke-linejoin:round}
+  .chart .dot{fill:var(--ultra);stroke:var(--paper);stroke-width:2}
 
   /* smaller projects */
   .small{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:8px}
@@ -168,6 +178,9 @@
     .figs{gap:22px 16px;padding:20px 16px;margin-left:-16px;margin-right:-16px}
     .fig b{font-size:38px}
     .charts,.small{grid-template-columns:1fr;gap:28px}
+    .chart .tick{font-size:17px}
+    .chart .lab{font-size:19px}
+    .chart .val{font-size:18px}
     .small h3{font-size:26px}
     .job,.swim,.edu{display:block}
     .job-when{margin-bottom:8px}
@@ -240,8 +253,11 @@
         </div>
 
         <div class="cols">
-          <div><h4>Problems I found</h4><p>Auditing the data turned up four shortcuts the model could learn instead of the voice itself, and a bug that misaligned 2,481 evaluation clips.</p><p>I also showed that a peer-reviewed dataset's published baselines used the wrong sample rate. I reproduced the authors' scores exactly (r = 1.000000), then traced the cause: real and fake clips at their native rates went into a model built for 16 kHz audio.</p></div>
+          <div><h4>What went wrong</h4><p>My own real WhatsApp voice notes scored as fake. That suggests the probe learned the dataset's recording conditions, not just the deepfakes.</p></div>
           <div><h4>What I learned</h4><p>Phone audio is the hard case. Passing audio through G.711 raised the error by 10.3 points on generators the model had not seen.</p></div>
+        </div>
+        <div class="cols one">
+          <div><h4>Problems I found</h4><p>Auditing the data turned up four shortcuts the model could learn instead of the voice itself, and a bug that misaligned 2,481 evaluation clips.</p><p>I also showed that a peer-reviewed dataset's published baselines used the wrong sample rate. I reproduced the authors' scores exactly (r = 1.000000), then traced the cause: real and fake clips at their native rates went into a model built for 16 kHz audio.</p></div>
         </div>
 
         <dl class="foot"><dt>Stack</dt><dd>Python, PyTorch, WavLM, ffmpeg</dd></dl>
@@ -255,35 +271,36 @@
         <h3 id="p2">World Cup Prediction Model</h3>
 
         <div class="cols">
-          <div><h4>Problem</h4><p>Predict the 48-team World Cup from international match results, then check the predictions against what actually happened.</p></div>
-          <div><h4>What I built</h4><p>A model trained on 49,000+ men's international match results since 1872, weighting recent matches more heavily so it reads current form over history.</p><p>I calibrated the randomness until favorites looked beatable rather than certain, then ran 20,000 simulations of the full tournament.</p></div>
+          <div><h4>Problem</h4><p>Predict the 48-team 2026 World Cup from international match results, then check the predictions against what actually happened.</p></div>
+          <div><h4>What I built</h4><p>A match model trained on 49,372 men's international results since 1872, using only information available before kickoff. Elo ratings, recent form, rest days and head-to-head record feed a logistic regression, and a Dixon-Coles goal model predicts scorelines.</p><p>The match probabilities drive a Monte Carlo simulator that plays the full tournament 20,000 times.</p></div>
         </div>
 
         <div class="figs">
-          <div class="fig"><b>61%</b><span>Results called correctly through the semifinals, 62 of 102</span></div>
-          <div class="fig"><b>73%</b><span>Correct in the knockout rounds</span></div>
-          <div class="fig"><b>11</b><span>Exact scorelines</span></div>
+          <div class="fig"><b>61%</b><span>Group-stage results called correctly, 44 of 72</span></div>
+          <div class="fig"><b>7</b><span>Exact scorelines in the group stage</span></div>
+          <div class="fig"><b>256</b><span>World Cup matches used to choose the model</span></div>
           <div class="fig"><b>20,000</b><span>Simulations of the full tournament</span></div>
         </div>
 
         <div class="charts">
           <figure>
-            <img src="assets/worldcup-results.png" srcset="assets/worldcup-results-1100.jpg 1100w, assets/worldcup-results.png 2149w" sizes="(max-width:760px) 100vw, 540px" alt="Bar chart of results called correctly by round: group stage 56 percent (40 of 72), round of 32 69 percent (11 of 16), round of 16 75 percent (6 of 8), quarterfinals 75 percent (3 of 4), semifinals 100 percent (2 of 2)." width="2149" height="1364" loading="lazy" decoding="async">
-            <figcaption class="cap"><b>Figure 1.</b> Results called correctly, by round.</figcaption>
+            <svg class="chart" viewBox="0 0 540 232" role="img" aria-labelledby="c1t c1d"><title id="c1t">Group-stage results called correctly, by matchday</title><desc id="c1d">Matchday 1: 12 of 24 correct, 1 exact. Matchday 2: 19 of 24, 5 exact. Matchday 3: 13 of 24, 1 exact. Total 44 of 72, 7 exact.</desc><line x1="110.0" y1="12" x2="110.0" y2="178" class="grid"/><text x="110.0" y="198" class="tick" text-anchor="middle">0</text><line x1="185.0" y1="12" x2="185.0" y2="178" class="grid"/><text x="185.0" y="198" class="tick" text-anchor="middle">6</text><line x1="260.0" y1="12" x2="260.0" y2="178" class="grid"/><text x="260.0" y="198" class="tick" text-anchor="middle">12</text><line x1="335.0" y1="12" x2="335.0" y2="178" class="grid"/><text x="335.0" y="198" class="tick" text-anchor="middle">18</text><line x1="410.0" y1="12" x2="410.0" y2="178" class="grid"/><text x="410.0" y="198" class="tick" text-anchor="middle">24</text><line x1="110" y1="12" x2="110" y2="178" class="axis"/><g><title>Matchday 1: 12 of 24 results correct, 1 exact scoreline</title><rect x="0" y="10" width="540" height="50" fill="transparent"/><text x="0" y="40" class="lab">Matchday 1</text><path d="M110 20h146.0a4 4 0 0 1 4 4v22a4 4 0 0 1 -4 4h-146.0z" class="mark"/><text x="268.0" y="40" class="val">12 of 24, 1 exact</text></g><g><title>Matchday 2: 19 of 24 results correct, 5 exact scorelines</title><rect x="0" y="66" width="540" height="50" fill="transparent"/><text x="0" y="96" class="lab">Matchday 2</text><path d="M110 76h233.5a4 4 0 0 1 4 4v22a4 4 0 0 1 -4 4h-233.5z" class="mark"/><text x="355.5" y="96" class="val">19 of 24, 5 exact</text></g><g><title>Matchday 3: 13 of 24 results correct, 1 exact scoreline</title><rect x="0" y="122" width="540" height="50" fill="transparent"/><text x="0" y="152" class="lab">Matchday 3</text><path d="M110 132h158.5a4 4 0 0 1 4 4v22a4 4 0 0 1 -4 4h-158.5z" class="mark"/><text x="280.5" y="152" class="val">13 of 24, 1 exact</text></g><text x="260" y="228" class="tick" text-anchor="middle">Results called correctly, out of 24 matches</text></svg>
+            <figcaption class="cap"><b>Figure 1.</b> Group-stage results called correctly by the Dixon-Coles goal model, by matchday. 44 of 72 overall, with 7 exact scorelines.</figcaption>
           </figure>
           <figure>
-            <img src="assets/worldcup-validation.png" srcset="assets/worldcup-validation-1100.jpg 1100w, assets/worldcup-validation.png 2039w" sizes="(max-width:760px) 100vw, 540px" alt="Line chart of champion prediction error on the 2010 to 2022 World Cups. Error is lowest at about 1.95 for pure Elo and rises steadily to about 2.36 as the Dixon-Coles goal model is blended in." width="2039" height="1286" loading="lazy" decoding="async">
-            <figcaption class="cap"><b>Figure 2.</b> Blending in the Dixon-Coles goal model only made champion predictions worse. Lower is better.</figcaption>
+            <svg class="chart" viewBox="0 0 540 290" role="img" aria-labelledby="c2t c2d"><title id="c2t">Champion log loss as the Dixon-Coles weight increases</title><desc id="c2d">Mean champion log loss over the 2010, 2014, 2018 and 2022 World Cups. Pure Elo (weight 0) is lowest at 1.950. Error rises steadily with more weight on the goal model, to 2.364 for pure Dixon-Coles.</desc><line x1="60" y1="240.0" x2="520" y2="240.0" class="grid"/><text x="52" y="244.0" class="tick" text-anchor="end">1.9</text><line x1="60" y1="196.0" x2="520" y2="196.0" class="grid"/><text x="52" y="200.0" class="tick" text-anchor="end">2.0</text><line x1="60" y1="152.0" x2="520" y2="152.0" class="grid"/><text x="52" y="156.0" class="tick" text-anchor="end">2.1</text><line x1="60" y1="108.0" x2="520" y2="108.0" class="grid"/><text x="52" y="112.0" class="tick" text-anchor="end">2.2</text><line x1="60" y1="64.0" x2="520" y2="64.0" class="grid"/><text x="52" y="68.0" class="tick" text-anchor="end">2.3</text><line x1="60" y1="20.0" x2="520" y2="20.0" class="grid"/><text x="52" y="24.0" class="tick" text-anchor="end">2.4</text><text x="60" y="260" class="tick" text-anchor="middle">0</text><text x="290.0" y="260" class="tick" text-anchor="middle">0.5</text><text x="520" y="260" class="tick" text-anchor="middle">1.0</text><line x1="60" y1="240" x2="520" y2="240" class="axis"/><polyline points="60.0,218.0 152.0,193.8 198.0,181.5 244.0,173.1 290.0,156.0 336.0,126.0 382.0,107.1 428.0,78.5 520.0,35.8" class="line"/><g><title>pure Elo: champion log loss 1.950</title><circle cx="60.0" cy="218.0" r="14" fill="transparent"/><circle cx="60.0" cy="218.0" r="6" class="dot"/></g><g><title>Dixon-Coles weight 0.2: champion log loss 2.005</title><circle cx="152.0" cy="193.8" r="14" fill="transparent"/><circle cx="152.0" cy="193.8" r="4" class="dot"/></g><g><title>Dixon-Coles weight 0.3: champion log loss 2.033</title><circle cx="198.0" cy="181.5" r="14" fill="transparent"/><circle cx="198.0" cy="181.5" r="4" class="dot"/></g><g><title>Dixon-Coles weight 0.4: champion log loss 2.052</title><circle cx="244.0" cy="173.1" r="14" fill="transparent"/><circle cx="244.0" cy="173.1" r="4" class="dot"/></g><g><title>Dixon-Coles weight 0.5: champion log loss 2.091</title><circle cx="290.0" cy="156.0" r="14" fill="transparent"/><circle cx="290.0" cy="156.0" r="4" class="dot"/></g><g><title>Dixon-Coles weight 0.6: champion log loss 2.159</title><circle cx="336.0" cy="126.0" r="14" fill="transparent"/><circle cx="336.0" cy="126.0" r="4" class="dot"/></g><g><title>Dixon-Coles weight 0.7: champion log loss 2.202</title><circle cx="382.0" cy="107.1" r="14" fill="transparent"/><circle cx="382.0" cy="107.1" r="4" class="dot"/></g><g><title>Dixon-Coles weight 0.8: champion log loss 2.267</title><circle cx="428.0" cy="78.5" r="14" fill="transparent"/><circle cx="428.0" cy="78.5" r="4" class="dot"/></g><g><title>pure Dixon-Coles: champion log loss 2.364</title><circle cx="520.0" cy="35.8" r="14" fill="transparent"/><circle cx="520.0" cy="35.8" r="4" class="dot"/></g><text x="74" y="232" class="val">Pure Elo, 1.950 (lowest)</text><text x="510" y="23.8" class="val" text-anchor="end">Pure Dixon-Coles, 2.364</text><text x="290" y="282" class="tick" text-anchor="middle">Weight on the Dixon-Coles goal model (0 is pure Elo)</text><text x="14" y="130" class="tick" text-anchor="middle" transform="rotate(-90 14 130)">Champion log loss</text></svg>
+            <figcaption class="cap"><b>Figure 2.</b> Champion log loss over the 2010 to 2022 World Cups. Lower is better. For picking champions, adding the goal model only made things worse.</figcaption>
           </figure>
         </div>
 
         <div class="cols">
-          <div><h4>What went wrong</h4><p>Against betting markets, the largest disagreement was Argentina: 15% in my model versus roughly 8%. I traced it to a real blind spot. The model sees only results, not squad age, injuries, or club form. That is what I am adding next.</p></div>
-          <div><h4>What I learned</h4><p>I tested a simple Elo rating system head to head against a Dixon-Coles goal model on the last four World Cups. Elo predicted champions better, so I shipped it and dropped the more complex model.</p></div>
+          <div><h4>What went wrong</h4><p>My first 2022 backtest was overconfident about the favorites. The match probabilities were already calibrated, so the problem was the simulation treating each team's rating as exact across seven games.</p><p>I fixed it by giving every team a random strength offset in each simulation, tuned on the 2010 to 2022 World Cups.</p></div>
+          <div><h4>What I learned</h4><p>Fit before each 2010 to 2022 World Cup and scored on those 256 matches, no single model beat the Elo backbone. Blending it with the Dixon-Coles goal model beat all of them (log loss 0.9880 vs 0.9961), so that ensemble is the 2026 engine.</p><p>Picking champions was different: pure Elo did best there (Figure 2). XGBoost and extra features from goalscorer data did not beat the backbone either.</p></div>
         </div>
 
         <dl class="foot">
-          <dt>Stack</dt><dd>Python, pandas, NumPy, SciPy, Elo ratings, Dixon-Coles, Monte Carlo simulation</dd>
+          <dt>Stack</dt><dd>Python, pandas, NumPy, scikit-learn, XGBoost</dd>
+          <dt>Methods</dt><dd>Elo ratings, logistic regression, Dixon-Coles goal model, Monte Carlo simulation</dd>
           <dt>Code</dt><dd><a href="https://github.com/brenogsantanaa/world-cup-2026-predictor" rel="noopener">github.com/brenogsantanaa/world-cup-2026-predictor</a></dd>
         </dl>
       </div>
@@ -367,7 +384,7 @@
       <ul>
         <li>Top 10 all time in Georgia Tech program history</li>
         <li>Multiple-time Brazilian junior national champion</li>
-        <li>Team captain</li>
+        <li>Club team captain, 2019 to 2023</li>
       </ul>
     </div>
   </section>
