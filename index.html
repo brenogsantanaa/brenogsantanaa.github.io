@@ -90,13 +90,6 @@
   .foot{margin-top:28px;display:grid;grid-template-columns:auto 1fr;gap:6px 20px;font-size:15px;border-top:1px solid var(--rule);padding-top:12px}
   .foot dt{color:var(--graphite)}
 
-  /* pipeline figure */
-  .pipe{margin-top:40px}
-  .pipe ol{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);counter-reset:s;border:1px solid var(--ink)}
-  .pipe li{counter-increment:s;padding:14px 16px;border-right:1px solid var(--ink);font-size:15.5px;line-height:1.4}
-  .pipe li:last-child{border-right:none;background:repeating-linear-gradient(135deg,transparent 0 6px,rgba(87,83,75,.10) 6px 7px)}
-  .pipe li::before{content:counter(s,decimal-leading-zero);display:block;font-family:var(--serif);font-size:26px;color:var(--terra);line-height:1;margin-bottom:8px}
-  .pipe li em{display:block;font-style:normal;font-size:13.5px;color:var(--graphite);margin-top:4px}
   figcaption.cap{font-size:14px;color:var(--graphite);margin-top:10px}
   figcaption.cap b{color:var(--ink);font-weight:600}
 
@@ -154,10 +147,6 @@
     .hero h1{font-size:60px}
     .stand{font-size:23px}
     .figs{grid-template-columns:1fr 1fr;gap:24px}
-    .pipe ol{grid-template-columns:1fr 1fr}
-    .pipe li{border-bottom:1px solid var(--ink)}
-    .pipe li:nth-child(2n){border-right:none}
-    .pipe li:last-child{grid-column:1/-1;border-bottom:none}
     .contact ul{grid-template-columns:1fr 1fr}
     .links{flex-direction:column;border-top:none;margin-top:24px}
     .links a{border-top:1px solid var(--rule);padding:13px 0;display:flex;justify-content:space-between}
@@ -230,71 +219,40 @@
 
   <!-- ============ PROJECTS ============ -->
   <section class="sec" id="projects">
-    <div class="sec-head"><h2>Projects</h2><p>Three case studies and two smaller builds</p></div>
+    <div class="sec-head"><h2>Projects</h2><p>Two case studies and two smaller builds</p></div>
 
     <article class="case" aria-labelledby="p1">
       <div class="case-no" aria-hidden="true">01</div>
       <div class="case-main">
         <h3 id="p1">Voice Deepfake Detection for Brazilian Portuguese</h3>
-        <p class="meta"><strong>In progress.</strong></p>
+        <p class="meta"><strong>In progress.</strong> Started August 2026.</p>
 
         <div class="cols">
           <div><h4>Problem</h4><p>Detect synthetic speech in Brazilian Portuguese, including audio that has passed through a phone line.</p></div>
-          <div><h4>What I built</h4><p>A probe on WavLM features that labels clips as real or synthetic, with a zero persistence design for LGPD: audio is processed and not stored.</p></div>
+          <div><h4>What I built</h4><p>A probe on WavLM features that labels clips as real or synthetic, trained on Portuguese deepfake data. I used ffmpeg to simulate phone-line audio (G.711) and test how the probe holds up.</p><p>The pipeline is zero persistence and aligned with LGPD: audio is processed and not stored.</p></div>
         </div>
 
         <div class="figs">
           <div class="fig"><b>2.6%</b><span>Equal error rate for the WavLM probe</span></div>
           <div class="fig"><b>+10.3</b><span>Points of error added by G.711 phone audio on unseen generators</span></div>
           <div class="fig"><b>4</b><span>Dataset shortcuts found that the model could exploit</span></div>
-          <div class="fig"><b>2,481</b><span>Clips misaligned by a bug I found</span></div>
+          <div class="fig"><b>2,481</b><span>Evaluation clips misaligned by a bug I found</span></div>
         </div>
 
         <div class="cols">
-          <div><h4>What went wrong</h4><p>Auditing the data turned up four shortcuts the model could learn instead of the voice itself, and a bug that misaligned 2,481 clips.</p></div>
+          <div><h4>Problems I found</h4><p>Auditing the data turned up four shortcuts the model could learn instead of the voice itself, and a bug that misaligned 2,481 evaluation clips.</p><p>I also showed that a peer-reviewed dataset's published baselines used the wrong sample rate. I reproduced the authors' scores exactly (r = 1.000000), then traced the cause: real and fake clips at their native rates went into a model built for 16 kHz audio.</p></div>
           <div><h4>What I learned</h4><p>Phone audio is the hard case. Passing audio through G.711 raised the error by 10.3 points on generators the model had not seen.</p></div>
         </div>
 
-        <!-- TODO(Breno): confirm the full stack and add a repo or write-up link if one is public. -->
-        <dl class="foot"><dt>Stack</dt><dd>WavLM</dd></dl>
+        <dl class="foot"><dt>Stack</dt><dd>Python, PyTorch, WavLM, ffmpeg</dd></dl>
       </div>
     </article>
+
 
     <article class="case" aria-labelledby="p2">
       <div class="case-no" aria-hidden="true">02</div>
       <div class="case-main">
-        <h3 id="p2">Malware Analysis Platform</h3>
-        <p class="meta"><strong>In progress.</strong></p>
-
-        <div class="cols">
-          <div><h4>Problem</h4><p>Triage Windows PE files offline, so nothing leaves the host.</p></div>
-          <div><h4>What I built</h4><p>A self-hosted service: upload a sample, parse it with <code>pefile</code>, match it against YARA rules, and persist the results.</p><p>It runs as a three-service Docker Compose stack (database, API, frontend), with named volumes for sample storage and rules mounted read-only.</p></div>
-        </div>
-
-        <figure class="pipe">
-          <ol>
-            <li>Upload a sample<em>Windows PE file</em></li>
-            <li>Parse<em>pefile</em></li>
-            <li>Match rules<em>YARA, mounted read-only</em></li>
-            <li>Store results<em>SQLite locally, PostgreSQL 16 in Docker</em></li>
-            <li>Classify<em>Heuristic placeholder today. Supervised ML is next.</em></li>
-          </ol>
-          <figcaption class="cap"><b>Figure 1.</b> How a sample moves through the platform. The striped step is not built yet.</figcaption>
-        </figure>
-
-        <div class="cols">
-          <div><h4>Where it stands</h4><p>Classification is a heuristic placeholder today. Supervised ML and MITRE ATT&amp;CK technique mapping are the next milestones.</p></div>
-          <div><h4>How it is tested</h4><p>Tested with pytest and httpx, type checked with mypy, and formatted with ruff and black.</p></div>
-        </div>
-
-        <dl class="foot"><dt>Stack</dt><dd>Python 3.11, FastAPI, SQLAlchemy, React, TypeScript, Vite, SQLite, PostgreSQL 16, Docker Compose, YARA, pefile, pytest, mypy</dd></dl>
-      </div>
-    </article>
-
-    <article class="case" aria-labelledby="p3">
-      <div class="case-no" aria-hidden="true">03</div>
-      <div class="case-main">
-        <h3 id="p3">World Cup Prediction Model</h3>
+        <h3 id="p2">World Cup Prediction Model</h3>
 
         <div class="cols">
           <div><h4>Problem</h4><p>Predict the 48-team World Cup from international match results, then check the predictions against what actually happened.</p></div>
@@ -311,11 +269,11 @@
         <div class="charts">
           <figure>
             <img src="assets/worldcup-results.png" srcset="assets/worldcup-results-1100.jpg 1100w, assets/worldcup-results.png 2149w" sizes="(max-width:760px) 100vw, 540px" alt="Bar chart of results called correctly by round: group stage 56 percent (40 of 72), round of 32 69 percent (11 of 16), round of 16 75 percent (6 of 8), quarterfinals 75 percent (3 of 4), semifinals 100 percent (2 of 2)." width="2149" height="1364" loading="lazy" decoding="async">
-            <figcaption class="cap"><b>Figure 2.</b> Results called correctly, by round.</figcaption>
+            <figcaption class="cap"><b>Figure 1.</b> Results called correctly, by round.</figcaption>
           </figure>
           <figure>
             <img src="assets/worldcup-validation.png" srcset="assets/worldcup-validation-1100.jpg 1100w, assets/worldcup-validation.png 2039w" sizes="(max-width:760px) 100vw, 540px" alt="Line chart of champion prediction error on the 2010 to 2022 World Cups. Error is lowest at about 1.95 for pure Elo and rises steadily to about 2.36 as the Dixon-Coles goal model is blended in." width="2039" height="1286" loading="lazy" decoding="async">
-            <figcaption class="cap"><b>Figure 3.</b> Blending in the Dixon-Coles goal model only made champion predictions worse. Lower is better.</figcaption>
+            <figcaption class="cap"><b>Figure 2.</b> Blending in the Dixon-Coles goal model only made champion predictions worse. Lower is better.</figcaption>
           </figure>
         </div>
 
@@ -331,10 +289,10 @@
       </div>
     </article>
 
-    <article class="case" aria-labelledby="p4">
-      <div class="case-no" aria-hidden="true">04</div>
+    <article class="case" aria-labelledby="p3">
+      <div class="case-no" aria-hidden="true">03</div>
       <div class="case-main">
-        <h3 id="p4">Hardware and embedded</h3>
+        <h3 id="p3">Hardware and embedded</h3>
         <div class="small">
           <div>
             <h4>Embedded 2D video game</h4>
@@ -387,7 +345,7 @@
     </article>
 
     <article class="job">
-      <div class="job-when"><b>Jun to Aug 2025</b>Curitiba, Brazil</div>
+      <div class="job-when"><b>Jun to Aug 2025</b>Uberlândia, Brazil (remote)</div>
       <div class="job-main">
         <h3>Positivo S+</h3>
         <p class="role">Security Operations Center Intern</p>
@@ -441,7 +399,6 @@
         <ul>
           <li>Internetwork Security</li>
           <li>Introduction to Computer Security</li>
-          <li>Advanced Programming Techniques</li>
         </ul>
         <h4>Certification</h4>
         <ul><li>Google Cybersecurity Professional Certificate</li></ul>
