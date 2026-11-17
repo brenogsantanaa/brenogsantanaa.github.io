@@ -232,7 +232,7 @@
 
   <!-- ============ PROJECTS ============ -->
   <section class="sec" id="projects">
-    <div class="sec-head"><h2>Projects</h2><p>Two case studies and two smaller builds</p></div>
+    <div class="sec-head"><h2>Projects</h2><p>Three case studies and two smaller builds</p></div>
 
     <article class="case" aria-labelledby="p1">
       <div class="case-no" aria-hidden="true">01</div>
@@ -265,8 +265,35 @@
     </article>
 
 
-    <article class="case" aria-labelledby="p2">
+    <article class="case" aria-labelledby="p-rl">
       <div class="case-no" aria-hidden="true">02</div>
+      <div class="case-main">
+        <h3 id="p-rl">RL Environments for Patching Vulnerabilities</h3>
+        <p class="meta"><strong>Frist RL Environments Hackathon, Security Track.</strong> November 2026, Atlanta.</p>
+
+        <div class="cols">
+          <div><h4>Problem</h4><p>AI coding agents struggle with authorization bugs and with brownfield work: changing one thing in a large codebase without breaking the rest. Training them needs environments where a real fix is rewarded and a shortcut is not.</p></div>
+          <div><h4>What I built</h4><p>Five reinforcement learning environments, each a clone of a real app (Jira, Amazon, DocuSign) with a planted IDOR bug. The agent's job is to find and patch the missing authorization check.</p><p>Each environment ships with a working exploit, a golden patch, and a grader that scores the agent's fix.</p></div>
+        </div>
+
+        <div class="figs">
+          <div class="fig"><b>5</b><span>RL environments built in one day</span></div>
+          <div class="fig"><b>3</b><span>Real apps cloned: Jira, Amazon, DocuSign</span></div>
+          <div class="fig"><b>IDOR</b><span>Planted vulnerability class, a missing authorization check</span></div>
+          <div class="fig"><b>0</b><span>Points for an agent that deletes the feature instead of fixing it</span></div>
+        </div>
+
+        <div class="cols">
+          <div><h4>Anti-gaming</h4><p>The easy way to "fix" an IDOR is to lock the endpoint down or remove it. The grader checks that the exploit no longer works and that legitimate users can still use the feature, so an agent that deletes the feature fails.</p></div>
+          <div><h4>What I learned</h4><p>Building a good environment is mostly building a good grader. The exploit and the patch were the easy part. Anticipating how an agent would cheat took most of the time.</p></div>
+        </div>
+
+        <dl class="foot"><dt>Stack</dt><dd>Docker, PostgreSQL, JavaScript, Claude Code</dd></dl>
+      </div>
+    </article>
+
+    <article class="case" aria-labelledby="p2">
+      <div class="case-no" aria-hidden="true">03</div>
       <div class="case-main">
         <h3 id="p2">World Cup Prediction Model</h3>
 
@@ -307,7 +334,7 @@
     </article>
 
     <article class="case" aria-labelledby="p3">
-      <div class="case-no" aria-hidden="true">03</div>
+      <div class="case-no" aria-hidden="true">04</div>
       <div class="case-main">
         <h3 id="p3">Hardware and embedded</h3>
         <div class="small">
